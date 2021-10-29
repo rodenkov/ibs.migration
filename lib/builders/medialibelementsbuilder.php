@@ -16,7 +16,7 @@ class MedialibElementsBuilder extends VersionBuilder
     /**
      * @return bool
      */
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return (!Locale::isWin1251() && $this->getHelperManager()->MedialibExchange()->isEnabled());
     }
@@ -43,13 +43,13 @@ class MedialibElementsBuilder extends VersionBuilder
         $collectionIds = $this->addFieldAndReturn(
             'collection_id',
             [
-                'title'       => Locale::getMessage('BUILDER_MedialibElements_CollectionId'),
+                'title' => Locale::getMessage('BUILDER_MedialibElements_CollectionId'),
                 'placeholder' => '',
-                'width'       => 250,
-                'select'      => $medialibExchange->getCollectionStructure(
+                'width' => 250,
+                'select' => $medialibExchange->getCollectionStructure(
                     $medialibExchange::TYPE_IMAGE
                 ),
-                'multiple'    => true,
+                'multiple' => true,
             ]
         );
 
@@ -68,6 +68,4 @@ class MedialibElementsBuilder extends VersionBuilder
             Module::getModuleDir() . '/templates/MedialibElementsExport.php'
         );
     }
-
-
 }

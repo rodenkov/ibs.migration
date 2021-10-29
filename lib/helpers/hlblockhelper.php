@@ -20,7 +20,7 @@ class HlblockHelper extends Helper
      *
      * @return bool
      */
-    public function isEnabled()
+    public function isEnabled():bool
     {
         return $this->checkModules(['highloadblock']);
     }

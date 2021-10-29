@@ -3,10 +3,8 @@
 namespace Sprint\Migration;
 
 use ReflectionClass;
-use ReflectionException;
 use Sprint\Migration\Exceptions\ExchangeException;
 use Sprint\Migration\Exceptions\RestartException;
-
 
 abstract class ExchangeEntity
 {
@@ -28,6 +26,7 @@ abstract class ExchangeEntity
         outDiffIf as protected;
         outMessages as protected;
     }
+
     /**
      * @var array
      */
@@ -38,96 +37,63 @@ abstract class ExchangeEntity
      */
     public function restart()
     {
-        Throw new RestartException();
+        throw new RestartException();
     }
 
-    /**
-     * @return array
-     */
-    public function getRestartParams()
+    public function getRestartParams(): array
     {
         return $this->params;
     }
 
-    /**
-     * @param array $params
-     */
-    public function setRestartParams($params = [])
+    public function setRestartParams(array $params = [])
     {
         $this->params = $params;
     }
 
-    /**
-     * @param $name
-     * @throws ExchangeException
-     * @return string
-     */
-    public function getResourceFile($name)
+    public function getResourceFile(string $name): string
     {
-        try {
-            $classInfo = new ReflectionClass($this);
-            return dirname($classInfo->getFileName()) . '/' . $classInfo->getShortName() . '_files/' . $name;
-        } catch (ReflectionException $e) {
-            $this->exitWithMessage($e->getMessage());
-        }
+        $classInfo = new ReflectionClass($this);
+        return dirname($classInfo->getFileName()) . '/' . $classInfo->getShortName() . '_files/' . $name;
     }
 
-    /**
-     * @throws ExchangeException
-     * @return string
-     */
-    public function getClassName()
+    public function getClassName(): string
     {
-        try {
-            $classInfo = new ReflectionClass($this);
-            $name = $classInfo->getShortName();
-        } catch (ReflectionException $e) {
-            $name = '';
-        }
-
-        $this->exitIfEmpty(
-            $name,
-            Locale::getMessage(
-                'ERR_CLASS_NOT_FOUND',
-                [
-                    '#NAME#' => $name,
-                ]
-            )
-        );
-        return $name;
+        return (new ReflectionClass($this))->getShortName();
     }
-
 
     /**
      * @param $msg
+     *
      * @throws ExchangeException
      */
     public function exitWithMessage($msg)
     {
-        Throw new ExchangeException($msg);
+        throw new ExchangeException($msg);
     }
 
     /**
      * @param $cond
      * @param $msg
+     *
      * @throws ExchangeException
      */
     public function exitIf($cond, $msg)
     {
         if ($cond) {
-            Throw new ExchangeException($msg);
+            throw new ExchangeException($msg);
         }
     }
 
     /**
      * @param $var
      * @param $msg
+     *
      * @throws ExchangeException
      */
     public function exitIfEmpty($var, $msg)
     {
         if (empty($var)) {
-            Throw new ExchangeException($msg);
+            throw new ExchangeException($msg);
         }
     }
 }

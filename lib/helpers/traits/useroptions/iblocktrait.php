@@ -4,34 +4,25 @@ namespace Sprint\Migration\Helpers\Traits\UserOptions;
 
 use CIBlock;
 use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\HelperManager;
-use Sprint\Migration\Locale;
 use Sprint\Migration\Traits\HelperManagerTrait;
 
 trait IblockTrait
 {
     use HelperManagerTrait;
 
-    private $titles = [];
-    private $props = [];
-    private $iblock = [];
+    private $titles       = [];
+    private $props        = [];
+    private $iblock       = [];
     private $lastIblockId = 0;
 
     /**
      * @param $iblockId
+     *
      * @throws HelperException
      * @return mixed
      */
     public function exportElementForm($iblockId)
     {
-        /**
-         * @compability
-         * @deprecated
-         */
-        if (func_num_args() > 1) {
-            $this->throwException(__METHOD__, '$params is no longer supported, see examples');
-        }
-
         $this->initializeIblockVars($iblockId);
 
         return $this->exportForm([
@@ -40,44 +31,14 @@ trait IblockTrait
     }
 
     /**
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $formData
-     * @throws HelperException
-     * @return mixed
-     */
-    public function buildElementForm($iblockId, $formData = [])
-    {
-        /**
-         * @compability
-         * @deprecated
-         */
-        if (func_num_args() > 2) {
-            $this->throwException(__METHOD__, '$params is no longer supported, see examples');
-        }
-
-        $this->initializeIblockVars($iblockId);
-
-        return $this->buildForm($formData, [
-            'name' => 'form_element_' . $iblockId,
-        ]);
-    }
-
-    /**
-     * @param $iblockId
-     * @param array $formData
+     *
      * @throws HelperException
      * @return mixed
      */
     public function saveElementForm($iblockId, $formData = [])
     {
-        /**
-         * @compability
-         * @deprecated
-         */
-        if (func_num_args() > 2) {
-            $this->throwException(__METHOD__, '$params is no longer supported, see examples');
-        }
-
         $this->initializeIblockVars($iblockId);
 
         return $this->saveForm($formData, [
@@ -86,8 +47,9 @@ trait IblockTrait
     }
 
     /**
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $params
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -97,8 +59,9 @@ trait IblockTrait
     }
 
     /**
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $params
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -109,6 +72,7 @@ trait IblockTrait
 
     /**
      * @param $iblockId
+     *
      * @throws HelperException
      * @return string
      */
@@ -127,6 +91,7 @@ trait IblockTrait
 
     /**
      * @param $iblockId
+     *
      * @throws HelperException
      * @return string
      */
@@ -138,6 +103,7 @@ trait IblockTrait
 
     /**
      * @param $iblockId
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -150,6 +116,7 @@ trait IblockTrait
 
     /**
      * @param $iblockId
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -159,8 +126,9 @@ trait IblockTrait
     }
 
     /**
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $listData
+     *
      * @throws HelperException
      */
     public function buildElementList($iblockId, $listData = [])
@@ -171,8 +139,9 @@ trait IblockTrait
     }
 
     /**
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $listData
+     *
      * @throws HelperException
      */
     public function saveElementList($iblockId, $listData = [])
@@ -184,6 +153,7 @@ trait IblockTrait
 
     /**
      * @param $iblockId
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -197,8 +167,9 @@ trait IblockTrait
     }
 
     /**
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $formData
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -212,8 +183,9 @@ trait IblockTrait
     }
 
     /**
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $formData
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -228,6 +200,7 @@ trait IblockTrait
 
     /**
      * @param $iblockId
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -241,8 +214,9 @@ trait IblockTrait
     }
 
     /**
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $listData
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -256,8 +230,9 @@ trait IblockTrait
     }
 
     /**
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $listData
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -270,32 +245,9 @@ trait IblockTrait
         ]);
     }
 
-
     /**
      * @param $iblockId
-     * @throws HelperException
-     * @return array|void
-     * @deprecated
-     */
-    public function extractElementForm($iblockId)
-    {
-        $result = $this->exportElementForm($iblockId);
-
-        if (!empty($result)) {
-            return $result;
-        }
-
-        $this->throwException(
-            __METHOD__,
-            Locale::getMessage(
-                'ERR_IB_FORM_OPTIONS_NOT_FOUND'
-            )
-        );
-    }
-
-
-    /**
-     * @param $iblockId
+     *
      * @throws HelperException
      * @return bool
      */

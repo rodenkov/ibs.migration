@@ -12,18 +12,18 @@ class SchemaManager extends ExchangeEntity
 
     /** @var VersionConfig */
     protected $versionConfig = null;
-
-    private $progress = [];
-
-    protected $testMode = 0;
+    private   $progress      = [];
+    protected $testMode      = 0;
 
     /**
      * SchemaManager constructor.
-     * @param string $configName
-     * @param array $params
+     *
+     * @param VersionConfig|string $configName
+     * @param array                $params
+     *
      * @throws Exception
      */
-    public function __construct($configName = '', $params = [])
+    public function __construct($configName = '', array $params = [])
     {
         if ($configName instanceof VersionConfig) {
             $this->versionConfig = $configName;
@@ -43,7 +43,7 @@ class SchemaManager extends ExchangeEntity
     /**
      * @return AbstractSchema[]
      */
-    public function getEnabledSchemas()
+    public function getEnabledSchemas(): array
     {
         $result = [];
         $schemas = $this->getVersionSchemas();
@@ -57,10 +57,9 @@ class SchemaManager extends ExchangeEntity
         return $result;
     }
 
-    protected function getVersionSchemas($filter = [])
+    protected function getVersionSchemas($filter = []): array
     {
-        $schemas = $this->getVersionConfig()->getVal('version_schemas');
-        $schemas = is_array($schemas) ? $schemas : [];
+        $schemas = $this->getVersionConfig()->getValArray('version_schemas');
 
         if (!isset($filter['name'])) {
             return $schemas;
@@ -78,14 +77,14 @@ class SchemaManager extends ExchangeEntity
         }
 
         return $filtered;
-
     }
 
     /**
      * @param array $filter
+     *
      * @throws RestartException
      */
-    public function export($filter = [])
+    public function export(array $filter = [])
     {
         $schemas = $this->getVersionSchemas($filter);
         $schemas = array_keys($schemas);
@@ -108,9 +107,10 @@ class SchemaManager extends ExchangeEntity
 
     /**
      * @param array $filter
+     *
      * @throws RestartException
      */
-    public function import($filter = [])
+    public function import(array $filter = [])
     {
         $this->progress = [];
 
@@ -147,7 +147,7 @@ class SchemaManager extends ExchangeEntity
         }
     }
 
-    protected function exportSchema($name)
+    protected function exportSchema($name): bool
     {
         $schema = $this->createSchema($name);
         if (!$schema->isEnabled()) {
@@ -192,12 +192,13 @@ class SchemaManager extends ExchangeEntity
     }
 
     /**
-     * @param $name
+     * @param string $name
+     *
      * @throws RestartException
      * @throws Exception
      * @return bool
      */
-    protected function importSchema($name)
+    protected function importSchema(string $name): bool
     {
         $schema = $this->createSchema($name);
         if (!$schema->isEnabled()) {
@@ -246,10 +247,11 @@ class SchemaManager extends ExchangeEntity
     }
 
     /**
-     * @param $name
+     * @param string $name
+     *
      * @return AbstractSchema
      */
-    protected function createSchema($name)
+    protected function createSchema(string $name): AbstractSchema
     {
         $schemas = $this->getVersionSchemas();
         $class = $schemas[$name];
@@ -265,16 +267,14 @@ class SchemaManager extends ExchangeEntity
         }
     }
 
-    protected function loadQueue(AbstractSchema $schema)
+    protected function loadQueue(AbstractSchema $schema): array
     {
         $file = $this->getQueueFile($schema->getName());
         if (is_file($file)) {
-            /** @noinspection PhpIncludeInspection */
             $items = include $file;
             if (
-                $items &&
-                isset($items['items']) &&
-                is_array($items['items'])
+                $items && isset($items['items'])
+                && is_array($items['items'])
             ) {
                 return $items['items'];
             }
@@ -285,6 +285,7 @@ class SchemaManager extends ExchangeEntity
 
     /**
      * @param AbstractSchema $schema
+     *
      * @throws Exception
      */
     protected function saveQueue(AbstractSchema $schema)
@@ -296,16 +297,13 @@ class SchemaManager extends ExchangeEntity
         file_put_contents($file, '<?php return ' . var_export(['items' => $data], 1) . ';');
     }
 
-    protected function getQueueFile($name)
+    protected function getQueueFile(string $name): string
     {
         $name = 'queue__' . strtolower($name);
         return Module::getDocRoot() . '/bitrix/tmp/sprint.migration/' . $name . '.php';
     }
 
-    /**
-     * @return ExchangeManager
-     */
-    protected function getExchangeManager()
+    protected function getExchangeManager(): ExchangeManager
     {
         return new ExchangeManager($this);
     }

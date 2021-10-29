@@ -7,7 +7,7 @@ use Sprint\Migration\VersionManager;
 /** @var $versionConfig VersionConfig */
 $versionManager = new VersionManager($versionConfig);
 
-$builderList = $versionConfig->getVal('version_builders', []);
+$builderList = $versionConfig->getValArray('version_builders');
 
 $builderTree = [];
 foreach ($builderList as $builderName => $builderClass) {

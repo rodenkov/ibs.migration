@@ -2,6 +2,7 @@
 
 namespace Sprint\Migration;
 
+use Bitrix\Main\DB\SqlQueryException;
 use Exception;
 use Sprint\Migration\Enum\VersionEnum;
 use Sprint\Migration\Exceptions\MigrationException;
@@ -17,7 +18,7 @@ class Installer
      *
      * @throws Exception
      */
-    public function __construct($configValues = [])
+    public function __construct(array $configValues = [])
     {
         $this->versionManager = new VersionManager(
             new VersionConfig('installer', $configValues)
@@ -26,6 +27,7 @@ class Installer
 
     /**
      * @throws MigrationException
+     * @throws SqlQueryException
      */
     public function up()
     {
@@ -38,6 +40,7 @@ class Installer
 
     /**
      * @throws MigrationException
+     * @throws SqlQueryException
      */
     public function down()
     {
@@ -52,6 +55,7 @@ class Installer
      * @param $filter
      *
      * @throws MigrationException
+     * @throws SqlQueryException
      */
     protected function executeAll($filter)
     {
@@ -70,7 +74,7 @@ class Installer
      * @throws MigrationException
      * @return bool
      */
-    protected function executeVersion($version, $action = VersionEnum::ACTION_UP)
+    protected function executeVersion(string $version, string $action = VersionEnum::ACTION_UP): bool
     {
         $params = [];
         do {

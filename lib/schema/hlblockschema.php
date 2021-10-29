@@ -2,6 +2,7 @@
 
 namespace Sprint\Migration\Schema;
 
+use Exception;
 use Sprint\Migration\AbstractSchema;
 use Sprint\Migration\Exceptions\HelperException;
 use Sprint\Migration\Locale;
@@ -10,7 +11,7 @@ class HlblockSchema extends AbstractSchema
 {
     private $uniqs = [];
 
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return $this->getHelperManager()->Hlblock()->isEnabled();
     }
@@ -29,9 +30,9 @@ class HlblockSchema extends AbstractSchema
     {
         $schemas = $this->loadSchemas(
             'hlblocks/', [
-            'hlblock' => [],
-            'fields'  => [],
-        ]
+                'hlblock' => [],
+                'fields'  => [],
+            ]
         );
 
         $cntFields = 0;
@@ -59,7 +60,7 @@ class HlblockSchema extends AbstractSchema
 
     /**
      * @throws HelperException
-     * @throws \Exception
+     * @throws Exception
      */
     public function export()
     {
@@ -70,9 +71,9 @@ class HlblockSchema extends AbstractSchema
         foreach ($exportItems as $item) {
             $this->saveSchema(
                 'hlblocks/' . strtolower($item['NAME']), [
-                'hlblock' => $item,
-                'fields'  => $helper->Hlblock()->exportFields($item['NAME']),
-            ]
+                    'hlblock' => $item,
+                    'fields'  => $helper->Hlblock()->exportFields($item['NAME']),
+                ]
             );
         }
     }
@@ -84,9 +85,9 @@ class HlblockSchema extends AbstractSchema
     {
         $schemas = $this->loadSchemas(
             'hlblocks/', [
-            'hlblock' => [],
-            'fields'  => [],
-        ]
+                'hlblock' => [],
+                'fields'  => [],
+            ]
         );
 
         foreach ($schemas as $schema) {

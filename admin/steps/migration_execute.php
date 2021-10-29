@@ -8,9 +8,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
 }
 
-
 if ($_POST["step_code"] == "migration_execute" && check_bitrix_sessid('send_sessid')) {
-
     /** @var $versionConfig VersionConfig */
     $versionManager = new VersionManager($versionConfig);
 
@@ -22,17 +20,16 @@ if ($_POST["step_code"] == "migration_execute" && check_bitrix_sessid('send_sess
     $skipVersions = !empty($_POST['skip_versions']) ? $_POST['skip_versions'] : [];
     $settag = !empty($_POST['settag']) ? trim($_POST['settag']) : '';
 
-
     $search = !empty($_POST['search']) ? trim($_POST['search']) : '';
     $search = Sprint\Migration\Locale::convertToUtf8IfNeed($search);
 
     $filter = !empty($_POST['filter']) ? trim($_POST['filter']) : '';
 
     $filterVersion = [
-        'search' => $search,
-        'tag' => '',
+        'search'   => $search,
+        'tag'      => '',
         'modified' => '',
-        'older' => '',
+        'older'    => '',
     ];
 
     if ($filter == 'migration_view_tag') {
@@ -44,10 +41,8 @@ if ($_POST["step_code"] == "migration_execute" && check_bitrix_sessid('send_sess
         $filterVersion['older'] = 1;
     }
 
-
     if (!$version) {
         if ($nextAction == VersionEnum::ACTION_UP || $nextAction == VersionEnum::ACTION_DOWN) {
-
             $version = 0;
             $action = $nextAction;
 
@@ -63,12 +58,10 @@ if ($_POST["step_code"] == "migration_execute" && check_bitrix_sessid('send_sess
                     break;
                 }
             }
-
         }
     }
 
     if ($version && $action) {
-
         if (!$restart) {
             Sprint\Migration\Out::out('[%s]%s (%s) start[/]', $action, $version, $action);
         }
@@ -88,7 +81,7 @@ if ($_POST["step_code"] == "migration_execute" && check_bitrix_sessid('send_sess
                 $versionManager->getLastException()->getMessage()
             );
 
-            if ($versionConfig->getVal('stop_on_errors')) {
+            if ($versionConfig->getValBool('stop_on_errors')) {
                 $nextAction = false;
             } else {
                 $skipVersions[] = $version;
@@ -97,25 +90,25 @@ if ($_POST["step_code"] == "migration_execute" && check_bitrix_sessid('send_sess
 
         if ($restart) {
             $json = json_encode([
-                'params' => $versionManager->getRestartParams($version),
-                'action' => $action,
-                'version' => $version,
+                'params'      => $versionManager->getRestartParams($version),
+                'action'      => $action,
+                'version'     => $version,
                 'next_action' => $nextAction,
-                'restart' => 1,
-                'search' => $search,
-                'filter' => $filter,
-                'settag' => $settag,
+                'restart'     => 1,
+                'search'      => $search,
+                'filter'      => $filter,
+                'settag'      => $settag,
             ]);
 
             ?>
             <script>migrationExecuteStep('migration_execute', <?=$json?>);</script><?php
         } elseif ($nextAction) {
             $json = json_encode([
-                'next_action' => $nextAction,
+                'next_action'   => $nextAction,
                 'skip_versions' => $skipVersions,
-                'settag' => $settag,
-                'search' => $search,
-                'filter' => $filter,
+                'settag'        => $settag,
+                'search'        => $search,
+                'filter'        => $filter,
             ]);
 
             ?>
@@ -136,5 +129,4 @@ if ($_POST["step_code"] == "migration_execute" && check_bitrix_sessid('send_sess
             migrationMigrationRefresh();
         </script><?php
     }
-
 }

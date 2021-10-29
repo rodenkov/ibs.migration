@@ -16,7 +16,7 @@ class HlblockElementsBuilder extends VersionBuilder
     /**
      * @return bool
      */
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return (!Locale::isWin1251() && $this->getHelperManager()->Hlblock()->isEnabled());
     }
@@ -42,10 +42,10 @@ class HlblockElementsBuilder extends VersionBuilder
         $hlblockId = $this->addFieldAndReturn(
             'hlblock_id',
             [
-                'title'       => Locale::getMessage('BUILDER_HlblockElementsExport_HlblockId'),
+                'title' => Locale::getMessage('BUILDER_HlblockElementsExport_HlblockId'),
                 'placeholder' => '',
-                'width'       => 250,
-                'select'      => $this->getHelperManager()->HlblockExchange()->getHlblocksStructure(),
+                'width' => 250,
+                'select' => $this->getHelperManager()->HlblockExchange()->getHlblocksStructure(),
             ]
         );
 

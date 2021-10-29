@@ -9,7 +9,7 @@ use Sprint\Migration\VersionBuilder;
 
 class UserOptionsBuilder extends VersionBuilder
 {
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }

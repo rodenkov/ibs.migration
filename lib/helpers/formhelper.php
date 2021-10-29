@@ -21,7 +21,7 @@ class FormHelper extends Helper
      *
      * @return bool
      */
-    public function isEnabled()
+    public function isEnabled():bool
     {
         return $this->checkModules(['form']);
     }
@@ -352,7 +352,7 @@ class FormHelper extends Helper
     {
         $userGroupHelper = new UserGroupHelper();
 
-        $dbres = Application::getConnection()->query(
+        $dbres = Application::getConnection()->query(/** @lang Text */
             "SELECT GROUP_ID, PERMISSION FROM b_form_2_group WHERE FORM_ID = {$formId}"
         );
 

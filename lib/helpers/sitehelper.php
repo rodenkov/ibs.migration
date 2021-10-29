@@ -10,7 +10,6 @@ use Sprint\Migration\Locale;
 
 class SiteHelper extends Helper
 {
-
     /**
      * @throws HelperException
      * @return mixed
@@ -36,6 +35,7 @@ class SiteHelper extends Helper
 
     /**
      * @param array $filter
+     *
      * @return array
      */
     public function getSites($filter = [])
@@ -73,6 +73,7 @@ class SiteHelper extends Helper
 
     /**
      * @param $siteId
+     *
      * @return array
      */
     public function getSiteTemplates($siteId)
@@ -82,8 +83,8 @@ class SiteHelper extends Helper
         $dbres = CSite::GetTemplateList($siteId);
         while ($item = $dbres->Fetch()) {
             $templates[] = [
-                "TEMPLATE" => $item['TEMPLATE'],
-                "SORT" => $item['SORT'],
+                "TEMPLATE"  => $item['TEMPLATE'],
+                "SORT"      => $item['SORT'],
                 "CONDITION" => $item['CONDITION'],
             ];
         }
@@ -93,8 +94,10 @@ class SiteHelper extends Helper
 
     /**
      * Устанавливает шаблоны сайта
-     * @param $siteId
+     *
+     * @param       $siteId
      * @param array $templates
+     *
      * @return bool
      */
     public function setSiteTemplates($siteId, $templates = [])
@@ -104,25 +107,29 @@ class SiteHelper extends Helper
         $validTemplates = [];
         foreach ($templates as $template) {
             if (!empty($template['IN_DIR'])) {
-                $template['CONDITION'] = sprintf('CSite::InDir(\'%s\')',
+                $template['CONDITION'] = sprintf(
+                    'CSite::InDir(\'%s\')',
                     $template['IN_DIR']
                 );
             } elseif (!empty($template['IN_PERIOD']) && is_array($template['IN_PERIOD'])) {
                 list($t1, $t2) = $template['IN_PERIOD'];
                 $t1 = is_numeric($t1) ? $t1 : strtotime($t1);
                 $t2 = is_numeric($t2) ? $t2 : strtotime($t2);
-                $template['CONDITION'] = sprintf('CSite::InPeriod(%s,%s)',
+                $template['CONDITION'] = sprintf(
+                    'CSite::InPeriod(%s,%s)',
                     $t1,
                     $t2
                 );
             } elseif (!empty($template['IN_GROUP']) && is_array($template['IN_GROUP'])) {
-                $template['CONDITION'] = sprintf('CSite::InGroup(array(%s))',
+                $template['CONDITION'] = sprintf(
+                    'CSite::InGroup(array(%s))',
                     implode(',', $template['IN_GROUP'])
                 );
             } elseif (!empty($template['GET_PARAM']) && is_array($template['GET_PARAM'])) {
                 $val = reset($template['GET_PARAM']);
                 $key = key($template['GET_PARAM']);
-                $template['CONDITION'] = sprintf('$_GET[\'%s\']==\'%s\'',
+                $template['CONDITION'] = sprintf(
+                    '$_GET[\'%s\']==\'%s\'',
                     $key,
                     $val
                 );
@@ -137,9 +144,9 @@ class SiteHelper extends Helper
             }
 
             $validTemplates[] = [
-                'TEMPLATE' => $template['TEMPLATE'],
+                'TEMPLATE'  => $template['TEMPLATE'],
                 'CONDITION' => $template['CONDITION'],
-                'SORT' => $sort,
+                'SORT'      => $sort,
             ];
 
             $sort++;
@@ -150,5 +157,4 @@ class SiteHelper extends Helper
             'TEMPLATE' => $validTemplates,
         ]);
     }
-
 }

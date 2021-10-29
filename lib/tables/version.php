@@ -12,9 +12,12 @@ class VersionTable extends AbstractTable
      * @throws SqlQueryException
      * @return array
      */
-    public function getRecords()
+    public function getRecords(): array
     {
-        return $this->query('SELECT * FROM `#TABLE1#`')->fetchAll();
+        return $this->query(
+        /** @lang Text */
+            'SELECT * FROM `#TABLE1#`'
+        )->fetchAll();
     }
 
     /**
@@ -26,6 +29,7 @@ class VersionTable extends AbstractTable
     public function getRecord($versionName)
     {
         return $this->query(
+        /** @lang Text */
             'SELECT * FROM `#TABLE1#` WHERE `version` = "%s"',
             $this->forSql($versionName)
         )->fetch();
@@ -43,6 +47,7 @@ class VersionTable extends AbstractTable
         $tag = $this->forSql($meta['tag']);
 
         $this->query(
+        /** @lang Text */
             'INSERT INTO `#TABLE1#` (`version`, `hash`, `tag`) VALUES ("%s", "%s", "%s") 
                     ON DUPLICATE KEY UPDATE `hash` = "%s", `tag` = "%s"',
             $version, $hash, $tag, $hash, $tag
@@ -50,29 +55,37 @@ class VersionTable extends AbstractTable
     }
 
     /**
-     * @param $meta
+     * @param array $meta
      *
      * @throws SqlQueryException
      */
-    public function removeRecord($meta)
+    public function removeRecord(array $meta)
     {
         $version = $this->forSql($meta['version']);
 
-        $this->query('DELETE FROM `#TABLE1#` WHERE `version` = "%s"', $version);
+        $this->query(
+        /** @lang Text */
+            'DELETE FROM `#TABLE1#` WHERE `version` = "%s"', $version
+        );
     }
 
     /**
-     * @param        $version
+     * @param string $version
      * @param string $tag
      *
      * @throws SqlQueryException
      */
-    public function updateTag($version, $tag = '')
+    public function updateTag(string $version, string $tag = '')
     {
         $version = $this->forSql($version);
         $tag = $this->forSql($tag);
 
-        $this->query('UPDATE `#TABLE1#` SET `tag` = "%s" WHERE `version` = "%s"', $tag, $version);
+        $this->query(
+        /** @lang Text */
+            'UPDATE `#TABLE1#` SET `tag` = "%s" WHERE `version` = "%s"',
+            $tag,
+            $version
+        );
     }
 
     /**
@@ -82,6 +95,7 @@ class VersionTable extends AbstractTable
     {
         //tableVersion 1
         $this->query(
+        /** @lang Text */
             'CREATE TABLE IF NOT EXISTS `#TABLE1#`(
               `id` MEDIUMINT NOT NULL AUTO_INCREMENT NOT NULL,
               `version` varchar(255) COLLATE #COLLATE# NOT NULL,
@@ -90,13 +104,13 @@ class VersionTable extends AbstractTable
         );
 
         //tableVersion 2
-        if (empty($this->query('SHOW COLUMNS FROM `#TABLE1#` LIKE "hash"')->fetch())) {
-            $this->query('ALTER TABLE `#TABLE1#` ADD COLUMN `hash` VARCHAR(50) NULL AFTER `version`');
+        if (empty($this->query(/** @lang Text */'SHOW COLUMNS FROM `#TABLE1#` LIKE "hash"')->fetch())) {
+            $this->query(/** @lang Text */'ALTER TABLE `#TABLE1#` ADD COLUMN `hash` VARCHAR(50) NULL AFTER `version`');
         }
 
         //tableVersion 3
-        if (empty($this->query('SHOW COLUMNS FROM `#TABLE1#` LIKE "tag"')->fetch())) {
-            $this->query('ALTER TABLE `#TABLE1#` ADD COLUMN `tag` VARCHAR(50) NULL AFTER `hash`');
+        if (empty($this->query(/** @lang Text */'SHOW COLUMNS FROM `#TABLE1#` LIKE "tag"')->fetch())) {
+            $this->query(/** @lang Text */'ALTER TABLE `#TABLE1#` ADD COLUMN `tag` VARCHAR(50) NULL AFTER `hash`');
         }
     }
 
@@ -105,6 +119,6 @@ class VersionTable extends AbstractTable
      */
     protected function dropTable()
     {
-        $this->query('DROP TABLE IF EXISTS `#TABLE1#`;');
+        $this->query(/** @lang Text */'DROP TABLE IF EXISTS `#TABLE1#`;');
     }
 }

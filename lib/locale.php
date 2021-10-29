@@ -4,9 +4,9 @@ namespace Sprint\Migration;
 
 class Locale
 {
-    public static function isWin1251()
+    public static function isWin1251(): bool
     {
-        return (defined('BX_UTF') && BX_UTF === true) ? 0 : 1;
+        return !(defined('BX_UTF') && BX_UTF === true);
     }
 
     public static function convertToWin1251IfNeed($msg)
@@ -25,9 +25,9 @@ class Locale
         return $msg;
     }
 
-    protected static function detectUtf8($msg)
+    protected static function detectUtf8($msg): bool
     {
-        return (md5($msg) == md5(iconv('utf-8', 'utf-8', $msg))) ? 1 : 0;
+        return (md5($msg) == md5(iconv('utf-8', 'utf-8', $msg)));
     }
 
     public static function loadLocale($lang, $loc)
@@ -38,9 +38,9 @@ class Locale
         }
     }
 
-    public static function getMessageName($shortName, $lang = false)
+    public static function getMessageName($shortName, $lang = false): string
     {
-        $lang = ($lang) ? $lang : self::getLang();
+        $lang = ($lang) ?: self::getLang();
 
         return strtoupper('SPRINT_MIGRATION_' . $lang . '_' . $shortName);
     }
@@ -53,6 +53,6 @@ class Locale
     public static function getMessage($shortName, $replaces = [])
     {
         $msg = GetMessage(self::getMessageName($shortName), $replaces);
-        return ($msg) ? : $shortName;
+        return ($msg) ?: $shortName;
     }
 }

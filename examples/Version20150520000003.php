@@ -4,7 +4,6 @@ namespace Sprint\Migration;
 
 class Version20150520000003 extends Version
 {
-
     protected $description = "Примеры вывода сообщений";
 
     /**
@@ -27,5 +26,4 @@ class Version20150520000003 extends Version
     {
         //your code ...
     }
-
 }

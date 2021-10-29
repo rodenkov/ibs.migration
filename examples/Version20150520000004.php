@@ -4,7 +4,6 @@ namespace Sprint\Migration;
 
 class Version20150520000004 extends Version
 {
-
     protected $description = "Пример отображения списка и формы для элементов инфоблока в админке";
 
     /**
@@ -13,7 +12,6 @@ class Version20150520000004 extends Version
      */
     public function up()
     {
-
         $helper = $this->getHelperManager();
 
         $iblockId = $helper->Iblock()->getIblockIdIfExists('content_news', 'content');
@@ -24,8 +22,8 @@ class Version20150520000004 extends Version
                 'ACTIVE' => 'Активность',
                 'ACTIVE_FROM',
                 'ACTIVE_TO',
-                'NAME' => 'Название',
-                'CODE' => 'Символьный код',
+                'NAME'   => 'Название',
+                'CODE'   => 'Символьный код',
                 'SORT',
             ],
             'Tab2' => [
@@ -36,10 +34,10 @@ class Version20150520000004 extends Version
 
         //Пример отображения списка элементов
         $helper->UserOptions()->saveElementList($iblockId, [
-            'order' => 'desc',
-            'by' => 'id',
+            'order'     => 'desc',
+            'by'        => 'id',
             'page_size' => 10,
-            'columns' => [
+            'columns'   => [
                 'NAME',
                 'SORT',
                 'ID',
@@ -50,11 +48,11 @@ class Version20150520000004 extends Version
         //Пример отображения формы редактирования категории
         $helper->UserOptions()->saveSectionForm($iblockId, [
             'Категория' => [
-                'ID' => 'ID',
-                'ACTIVE' => 'Раздел активен',
+                'ID'                => 'ID',
+                'ACTIVE'            => 'Раздел активен',
                 'IBLOCK_SECTION_ID' => 'Родительский раздел',
-                'NAME' => 'Название',
-                'USER_FIELDS_ADD' => 'Добавить пользовательское свойство',
+                'NAME'              => 'Название',
+                'USER_FIELDS_ADD'   => 'Добавить пользовательское свойство',
             ],
         ]);
     }
@@ -66,5 +64,4 @@ class Version20150520000004 extends Version
     {
         //
     }
-
 }

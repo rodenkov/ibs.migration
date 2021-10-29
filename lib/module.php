@@ -3,7 +3,7 @@
 namespace Sprint\Migration;
 
 use COption;
-use Exception;
+use Sprint\Migration\Exceptions\MigrationException;
 
 class Module
 {
@@ -54,7 +54,7 @@ class Module
         }
     }
 
-    public static function getRelativeDir($dir)
+    public static function getRelativeDir($dir): string
     {
         $docroot = Module::getDocRoot();
         $docroot = str_replace('/', DIRECTORY_SEPARATOR, $docroot);
@@ -67,7 +67,8 @@ class Module
 
     /**
      * @param $dir
-     * @throws Exception
+     *
+     * @throws MigrationException
      * @return mixed
      */
     public static function createDir($dir)
@@ -77,7 +78,7 @@ class Module
         }
 
         if (!is_dir($dir)) {
-            Throw new Exception(
+            throw new MigrationException(
                 Locale::getMessage(
                     'ERR_CANT_CREATE_DIRECTORY',
                     [
@@ -102,12 +103,12 @@ class Module
     }
 
     /**
-     * @throws Exception
+     * @throws MigrationException
      */
     public static function checkHealth()
     {
         if (isset($GLOBALS['DBType']) && strtolower($GLOBALS['DBType']) == 'mssql') {
-            Throw new Exception(
+            throw new MigrationException(
                 Locale::getMessage(
                     'ERR_MSSQL_NOT_SUPPORTED'
                 )
@@ -115,7 +116,7 @@ class Module
         }
 
         if (!function_exists('json_encode')) {
-            Throw new Exception(
+            throw new MigrationException(
                 Locale::getMessage(
                     'ERR_JSON_NOT_SUPPORTED'
                 )
@@ -123,7 +124,7 @@ class Module
         }
 
         if (version_compare(PHP_VERSION, '7.0', '<')) {
-            Throw new Exception(
+            throw new MigrationException(
                 Locale::getMessage(
                     'ERR_PHP_NOT_SUPPORTED',
                     [
@@ -134,10 +135,10 @@ class Module
         }
 
         if (
-            is_file($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/sprint.migration/include.php') &&
-            is_file($_SERVER['DOCUMENT_ROOT'] . '/local/modules/sprint.migration/include.php')
+            is_file($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/sprint.migration/include.php')
+            && is_file($_SERVER['DOCUMENT_ROOT'] . '/local/modules/sprint.migration/include.php')
         ) {
-            Throw new Exception('module installed to bitrix and local folder');
+            throw new MigrationException('module installed to bitrix and local folder');
         }
     }
 }

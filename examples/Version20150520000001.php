@@ -4,7 +4,6 @@ namespace Sprint\Migration;
 
 class Version20150520000001 extends Version
 {
-
     protected $description = "Добавляем инфоблок новости";
 
     /**
@@ -16,15 +15,15 @@ class Version20150520000001 extends Version
         $helper = $this->getHelperManager();
 
         $helper->Iblock()->saveIblockType([
-            'ID' => 'content',
+            'ID'   => 'content',
             'LANG' => [
                 'en' => [
-                    'NAME' => 'Контент',
+                    'NAME'         => 'Контент',
                     'SECTION_NAME' => 'Sections',
                     'ELEMENT_NAME' => 'Elements',
                 ],
                 'ru' => [
-                    'NAME' => 'Контент',
+                    'NAME'         => 'Контент',
                     'SECTION_NAME' => 'Разделы',
                     'ELEMENT_NAME' => 'Элементы',
                 ],
@@ -32,11 +31,11 @@ class Version20150520000001 extends Version
         ]);
 
         $iblockId1 = $helper->Iblock()->saveIblock([
-            'NAME' => 'Новости',
-            'CODE' => 'content_news',
-            'LID' => ['s1'],
-            'IBLOCK_TYPE_ID' => 'content',
-            'LIST_PAGE_URL' => '',
+            'NAME'            => 'Новости',
+            'CODE'            => 'content_news',
+            'LID'             => ['s1'],
+            'IBLOCK_TYPE_ID'  => 'content',
+            'LIST_PAGE_URL'   => '',
             'DETAIL_PAGE_URL' => '#SITE_DIR#/news/#ELEMENT_ID#',
         ]);
 
@@ -44,7 +43,7 @@ class Version20150520000001 extends Version
             'CODE' => [
                 'DEFAULT_VALUE' => [
                     'TRANSLITERATION' => 'Y',
-                    'UNIQUE' => 'Y',
+                    'UNIQUE'          => 'Y',
                 ],
             ],
         ]);
@@ -55,7 +54,6 @@ class Version20150520000001 extends Version
         ]);
 
         $this->outSuccess('Инфоблок создан');
-
     }
 
     /**
@@ -73,5 +71,4 @@ class Version20150520000001 extends Version
             $this->outError('Ошибка удаления инфоблока');
         }
     }
-
 }

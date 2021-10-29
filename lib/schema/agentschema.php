@@ -8,7 +8,7 @@ use Sprint\Migration\Locale;
 
 class AgentSchema extends AbstractSchema
 {
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }

@@ -12,7 +12,7 @@ use Sprint\Migration\VersionBuilder;
 
 class FormBuilder extends VersionBuilder
 {
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return $this->getHelperManager()->Form()->isEnabled();
     }
@@ -46,8 +46,8 @@ class FormBuilder extends VersionBuilder
         }
 
         $formId = $this->addFieldAndReturn('form_id', [
-            'title' => Locale::getMessage('BUILDER_FormExport_FormId'),
-            'width' => 250,
+            'title'  => Locale::getMessage('BUILDER_FormExport_FormId'),
+            'width'  => 250,
             'select' => $structure,
         ]);
 
@@ -59,11 +59,11 @@ class FormBuilder extends VersionBuilder
         unset($form['VARNAME']);
 
         $what = $this->addFieldAndReturn('what_else', [
-            'title' => Locale::getMessage('BUILDER_FormExport_What'),
-            'width' => 250,
+            'title'    => Locale::getMessage('BUILDER_FormExport_What'),
+            'width'    => 250,
             'multiple' => 1,
-            'value' => [],
-            'select' => [
+            'value'    => [],
+            'select'   => [
                 [
                     'title' => Locale::getMessage('BUILDER_FormExport_Form'),
                     'value' => 'form',
@@ -116,7 +116,6 @@ class FormBuilder extends VersionBuilder
                     }
                 }
 
-
                 if (is_array($field['VALIDATORS'])) {
                     foreach ($field['VALIDATORS'] as $validatorIndex => $validator) {
                         unset($validator['ID']);
@@ -137,9 +136,9 @@ class FormBuilder extends VersionBuilder
             Module::getModuleDir() . '/templates/FormExport.php',
             [
                 'formExport' => $formExport,
-                'form' => $form,
-                'statuses' => $statuses,
-                'fields' => $fields,
+                'form'       => $form,
+                'statuses'   => $statuses,
+                'fields'     => $fields,
             ]
         );
     }

@@ -30,20 +30,20 @@ foreach ($configs as $config) {
 $arParameters = [
     'USER_PARAMETERS' => [
         'SELECT_CONFIGS' => [
-            'NAME' => Locale::getMessage('GD_SELECT_CONFIGS'),
-            'TYPE' => 'LIST',
-            'SIZE' => 10,
-            'VALUES' => $configValues,
+            'NAME'     => Locale::getMessage('GD_SELECT_CONFIGS'),
+            'TYPE'     => 'LIST',
+            'SIZE'     => 10,
+            'VALUES'   => $configValues,
             'MULTIPLE' => 'Y',
-            'DEFAULT' => [],
+            'DEFAULT'  => [],
         ],
-        'CHECK_SCHEMAS' => [
-            'NAME' => Locale::getMessage('GD_CHECK_SCHEMAS'),
-            'TYPE' => 'LIST',
-            'SIZE' => 10,
-            'VALUES' => $schemaValues,
+        'CHECK_SCHEMAS'  => [
+            'NAME'     => Locale::getMessage('GD_CHECK_SCHEMAS'),
+            'TYPE'     => 'LIST',
+            'SIZE'     => 10,
+            'VALUES'   => $schemaValues,
             'MULTIPLE' => 'Y',
-            'DEFAULT' => [],
+            'DEFAULT'  => [],
         ],
     ],
 ];

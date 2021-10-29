@@ -8,8 +8,7 @@ use Sprint\Migration\VersionBuilder;
 
 class BlankBuilder extends VersionBuilder
 {
-
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }

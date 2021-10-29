@@ -4,7 +4,7 @@ use Sprint\Migration\Locale;
 
 class sprint_migration extends CModule
 {
-    var $MODULE_ID = "sprint.migration";
+    var $MODULE_ID           = "sprint.migration";
     var $MODULE_NAME;
     var $MODULE_VERSION;
     var $MODULE_VERSION_DATE;

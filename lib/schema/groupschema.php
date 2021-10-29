@@ -9,7 +9,7 @@ use Sprint\Migration\Locale;
 
 class GroupSchema extends AbstractSchema
 {
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }

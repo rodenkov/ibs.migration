@@ -11,7 +11,7 @@ use Sprint\Migration\VersionBuilder;
 
 class IblockBuilder extends VersionBuilder
 {
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled(): bool
     {
         return $this->getHelperManager()->Iblock()->isEnabled();
     }

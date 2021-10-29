@@ -5,7 +5,6 @@ namespace Sprint\Migration\Helpers;
 use Bitrix\Main\Application;
 use Bitrix\Main\DB\Result;
 use Bitrix\Main\Db\SqlQueryException;
-use Exception;
 use Sprint\Migration\Exceptions\HelperException;
 use Sprint\Migration\Helper;
 use Throwable;
@@ -37,9 +36,6 @@ class SqlHelper extends Helper
             }
 
             $connection->commitTransaction();
-        } catch (Exception $ex) {
-            $connection->rollbackTransaction();
-            $this->throwException(__METHOD__, $ex->getMessage());
         } catch (Throwable $ex) {
             $connection->rollbackTransaction();
             $this->throwException(__METHOD__, $ex->getMessage());
@@ -52,7 +48,7 @@ class SqlHelper extends Helper
      * @throws SqlQueryException
      * @return Result
      */
-    public function query($query)
+    public function query($query): Result
     {
         return Application::getConnection()->query($query);
     }
@@ -63,7 +59,7 @@ class SqlHelper extends Helper
      *
      * @return string
      */
-    public function forSql($value, $maxLength = 0)
+    public function forSql($value, $maxLength = 0): string
     {
         return Application::getConnection()->getSqlHelper()->forSql($value, $maxLength);
     }
@@ -77,7 +73,13 @@ class SqlHelper extends Helper
      */
     public function getColumn($table, $name)
     {
-        return $this->query(sprintf('SHOW COLUMNS FROM `%s` WHERE Field="%s"', $table, $name))->Fetch();
+        return $this->query(
+            sprintf(
+            /** @lang Text */ 'SHOW COLUMNS FROM `%s` WHERE Field="%s"',
+                $table,
+                $name
+            )
+        )->Fetch();
     }
 
     /**
@@ -87,11 +89,19 @@ class SqlHelper extends Helper
      *
      * @throws SqlQueryException
      */
-    public function addColumn($table, $name, $attributes)
+    public function addColumn(string $table, $name, $attributes)
     {
         //$attributes = 'int(11) unsigned DEFAULT NULL AFTER `ID`';
 
-        $this->query(sprintf('ALTER TABLE `%s` ADD COLUMN %s %s', $table, $name, $attributes));
+        $this->query(
+            sprintf(
+            /** @lang Text */
+                'ALTER TABLE `%s` ADD COLUMN %s %s',
+                $table,
+                $name,
+                $attributes
+            )
+        );
     }
 
     /**
@@ -119,7 +129,13 @@ class SqlHelper extends Helper
      */
     public function getIndex($table, $name)
     {
-        return $this->query(sprintf('SHOW INDEX FROM `%s` WHERE Key_name="%s"', $table, $name))->Fetch();
+        return $this->query(
+            sprintf(
+            /** @lang Text */ 'SHOW INDEX FROM `%s` WHERE Key_name="%s"',
+                $table,
+                $name
+            )
+        )->Fetch();
     }
 
     /**
@@ -133,7 +149,12 @@ class SqlHelper extends Helper
     {
         $columns = $this->prepareColumnsForIndex($columns);
 
-        $this->query(sprintf('ALTER TABLE `%s` ADD INDEX `%s` (%s)', $table, $name, $columns));
+        $this->query(sprintf(
+        /** @lang Text */'ALTER TABLE `%s` ADD INDEX `%s` (%s)',
+            $table,
+            $name,
+            $columns
+        ));
     }
 
     /**
@@ -152,7 +173,7 @@ class SqlHelper extends Helper
         }
     }
 
-    private function prepareColumnsForIndex($columns)
+    private function prepareColumnsForIndex($columns): string
     {
         $columns = is_array($columns) ? $columns : [$columns];
         $columns = array_map(

@@ -12,7 +12,6 @@ $existsEvents = (
 );
 
 if ($existsEvents && check_bitrix_sessid('send_sessid')) {
-
     /** @var $versionConfig VersionConfig */
     $versionManager = new VersionManager($versionConfig);
 

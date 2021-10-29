@@ -2,6 +2,7 @@
 
 use Sprint\Migration\Locale;
 use Sprint\Migration\Out;
+
 global $APPLICATION;
 $APPLICATION->SetTitle(Locale::getMessage('TITLE'));
 
@@ -17,7 +18,7 @@ if (isset($_REQUEST['schema'])) {
     $versionConfig = new Sprint\Migration\VersionConfig();
 }
 
-if ($versionConfig->getVal('show_admin_interface')) {
+if ($versionConfig->getValBool('show_admin_interface')) {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /** @noinspection PhpIncludeInspection */
         require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_js.php");
@@ -37,8 +38,6 @@ if ($versionConfig->getVal('show_admin_interface')) {
                 include __DIR__ . '/../steps/migration_settag.php';
                 include __DIR__ . '/../steps/migration_transfer.php';
             }
-        } catch (Exception $e) {
-            Out::outError($e->getMessage());
         } catch (Throwable $e) {
             Out::outError($e->getMessage());
         }
@@ -51,7 +50,7 @@ if ($versionConfig->getVal('show_admin_interface')) {
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_after.php");
 CUtil::InitJSCore(["jquery"]);
 
-if ($versionConfig->getVal('show_admin_interface')) {
+if ($versionConfig->getValBool('show_admin_interface')) {
     if (isset($_REQUEST['schema'])) {
         include __DIR__ . '/../includes/schema.php';
         include __DIR__ . '/../assets/schema.php';
@@ -62,7 +61,7 @@ if ($versionConfig->getVal('show_admin_interface')) {
 }
 
 $sperrors = [];
-if (!$versionConfig->getVal('show_admin_interface')) {
+if (!$versionConfig->getValBool('show_admin_interface')) {
     $sperrors[] = Locale::getMessage('ADMIN_INTERFACE_HIDDEN');
 }
 

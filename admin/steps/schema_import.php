@@ -10,8 +10,8 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
 }
 
 $hasSteps = (
-    ($_POST['step_code'] == 'schema_import') ||
-    ($_POST['step_code'] == 'schema_test')
+    ($_POST['step_code'] == 'schema_import')
+    || ($_POST['step_code'] == 'schema_test')
 );
 
 if ($hasSteps && check_bitrix_sessid('send_sessid')) {
@@ -35,9 +35,7 @@ if ($hasSteps && check_bitrix_sessid('send_sessid')) {
         $schemaManager->import(['name' => $checked]);
 
         $ok = true;
-
     } catch (RestartException $e) {
-
         $json = json_encode([
             'params' => $schemaManager->getRestartParams(),
         ]);
@@ -47,10 +45,6 @@ if ($hasSteps && check_bitrix_sessid('send_sessid')) {
             schemaExecuteStep('<?=$stepCode?>', <?=$json?>);
         </script>
         <?php
-    } catch (Exception $e) {
-        Out::outError($e->getMessage());
-        $error = true;
-
     } catch (Throwable $e) {
         Out::outError($e->getMessage());
         $error = true;

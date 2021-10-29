@@ -10,8 +10,8 @@ use Sprint\Migration\Module;
 
 abstract class AbstractTable
 {
-    private $tableName = '';
-    private $dbName = '';
+    private   $tableName;
+    private   $dbName;
     protected $tableVersion = 1;
     protected $connection;
 
@@ -40,19 +40,19 @@ abstract class AbstractTable
         Module::removeDbOption($this->getUid());
     }
 
-    private function getUid()
+    private function getUid(): string
     {
         return 'upgrade' . $this->tableVersion . '_' . md5($this->tableName);
     }
 
     /**
-     * @param        $query
+     * @param string $query
      * @param string ...$vars
      *
      * @throws SqlQueryException
      * @return Result
      */
-    protected function query($query, ...$vars)
+    protected function query(string $query, ...$vars): Result
     {
         if (func_num_args() > 1) {
             $params = func_get_args();
@@ -79,7 +79,7 @@ abstract class AbstractTable
         return $this->connection->query($query);
     }
 
-    protected function forSql($query)
+    protected function forSql($query): string
     {
         return $this->connection->getSqlHelper()->forSql($query);
     }

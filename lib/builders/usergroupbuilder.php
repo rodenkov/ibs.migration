@@ -10,7 +10,7 @@ use Sprint\Migration\VersionBuilder;
 
 class UserGroupBuilder extends VersionBuilder
 {
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }
@@ -34,12 +34,12 @@ class UserGroupBuilder extends VersionBuilder
         $userGroups = $this->addFieldAndReturn(
             'user_group',
             [
-                'title'       => Locale::getMessage('BUILDER_UserGroupExport_user_group'),
+                'title' => Locale::getMessage('BUILDER_UserGroupExport_user_group'),
                 'placeholder' => '',
-                'multiple'    => 1,
-                'value'       => [],
-                'width'       => 250,
-                'select'      => $this->getUserGroups(),
+                'multiple' => 1,
+                'value' => [],
+                'width' => 250,
+                'select' => $this->getUserGroups(),
             ]
         );
 

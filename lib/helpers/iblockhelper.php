@@ -22,9 +22,8 @@ class IblockHelper extends Helper
     /**
      * IblockHelper constructor.
      */
-    public function isEnabled()
+    public function isEnabled():bool
     {
         return $this->checkModules(['iblock']);
     }
-
 }

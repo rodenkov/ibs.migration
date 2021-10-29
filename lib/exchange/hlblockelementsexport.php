@@ -45,9 +45,9 @@ class HlblockElementsExport extends AbstractExchange
             $items = $hblockExchange->getElements(
                 $this->hlblockId,
                 [
-                    'order'  => ['ID' => 'ASC'],
+                    'order' => ['ID' => 'ASC'],
                     'offset' => $params['offset'],
-                    'limit'  => $this->getLimit(),
+                    'limit' => $this->getLimit(),
                 ]
             );
 

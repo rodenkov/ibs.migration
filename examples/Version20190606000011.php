@@ -2,16 +2,13 @@
 
 namespace Sprint\Migration;
 
-
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Exception;
 
-
 class Version20190606000011 extends Version
 {
-
     protected $description = "Пример работы с доступами групп к инфоблоками и highload-блоками";
 
     /**

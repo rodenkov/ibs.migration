@@ -24,9 +24,9 @@ if ($_POST["step_code"] == "migration_view_status" && check_bitrix_sessid('send_
     );
 
     $status = [
-        VersionEnum::STATUS_NEW       => 0,
+        VersionEnum::STATUS_NEW => 0,
         VersionEnum::STATUS_INSTALLED => 0,
-        VersionEnum::STATUS_UNKNOWN   => 0,
+        VersionEnum::STATUS_UNKNOWN => 0,
     ];
 
     foreach ($versions as $item) {

@@ -97,7 +97,7 @@ trait IblockElementTrait
 
         $list = [];
         while ($item = $dbres->Fetch()) {
-            $list[] = $this->prepareElement($item);;
+            $list[] = $this->prepareElement($item);
         }
         return $list;
     }

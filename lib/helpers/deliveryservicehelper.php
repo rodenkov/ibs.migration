@@ -18,9 +18,10 @@ class DeliveryServiceHelper extends Helper
 {
     /**
      * DeliveryServiceHelper constructor.
+     *
      * @return bool
      */
-    public function isEnabled()
+    public function isEnabled():bool
     {
         return $this->checkModules(['sale']);
     }
@@ -47,6 +48,7 @@ class DeliveryServiceHelper extends Helper
     /**
      * Добавляет службу доставки. Позвоялет указывать символьный код в 'CODE' и он будет сохранён дополнительным
      * запросом, чего Битрикс делать не умеет.
+     *
      * @param array $fields
      *
      *    [
@@ -135,9 +137,9 @@ class DeliveryServiceHelper extends Helper
     public function get($code)
     {
         $fields = Table::query()->setSelect(['*'])
-            ->setFilter(['CODE' => trim($code)])
-            ->exec()
-            ->fetch();
+                       ->setFilter(['CODE' => trim($code)])
+                       ->exec()
+                       ->fetch();
 
         if (false === $fields) {
             $this->throwException(
@@ -151,7 +153,7 @@ class DeliveryServiceHelper extends Helper
     }
 
     /**
-     * @param $code
+     * @param       $code
      * @param array $fields
      *
      * @throws Exception

@@ -11,8 +11,7 @@ use Sprint\Migration\VersionManager;
 
 class TransferBuilder extends AbstractBuilder
 {
-
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }
@@ -35,10 +34,10 @@ class TransferBuilder extends AbstractBuilder
         }
 
         $this->addField('transfer_filter', [
-            'title' => Locale::getMessage('BUILDER_TransferSelect'),
+            'title'       => Locale::getMessage('BUILDER_TransferSelect'),
             'placeholder' => '',
-            'width' => 250,
-            'select' => [
+            'width'       => 250,
+            'select'      => [
                 [
                     'title' => Locale::getMessage('BUILDER_TransferInstalled'),
                     'value' => VersionEnum::STATUS_INSTALLED,
@@ -59,10 +58,10 @@ class TransferBuilder extends AbstractBuilder
         ]);
 
         $this->addField('transfer_to', [
-            'title' => Locale::getMessage('BUILDER_TransferTo'),
+            'title'       => Locale::getMessage('BUILDER_TransferTo'),
             'placeholder' => '',
-            'width' => 250,
-            'select' => $structure,
+            'width'       => 250,
+            'select'      => $structure,
         ]);
     }
 
@@ -84,7 +83,6 @@ class TransferBuilder extends AbstractBuilder
             $this->getFieldValue('transfer_filter'),
             $vmTo
         );
-
 
         $cnt = 0;
         foreach ($transferresult as $item) {

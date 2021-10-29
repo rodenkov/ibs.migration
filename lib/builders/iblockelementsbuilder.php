@@ -16,7 +16,7 @@ class IblockElementsBuilder extends VersionBuilder
     /**
      * @return bool
      */
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return (!Locale::isWin1251() && $this->getHelperManager()->Iblock()->isEnabled());
     }

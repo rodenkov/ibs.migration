@@ -22,6 +22,9 @@
     "php": ">=7.0",
     "composer/installers": "~1",
     "ext-json": "*",
-    "ext-iconv": "*"
+    "ext-iconv": "*",
+    "ext-xmlreader": "*",
+    "ext-xmlwriter": "*",
+    "ext-mbstring": "*"
   }
 }

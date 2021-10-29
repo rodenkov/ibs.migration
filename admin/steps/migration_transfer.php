@@ -12,7 +12,6 @@ $existsEvents = (
 );
 
 if ($existsEvents && check_bitrix_sessid('send_sessid')) {
-
     $version = !empty($_POST['version']) ? $_POST['version'] : '';
     $transferTo = !empty($_POST['transfer_to']) ? $_POST['transfer_to'] : '';
 

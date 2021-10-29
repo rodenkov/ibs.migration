@@ -3,7 +3,6 @@
 namespace Sprint\Migration;
 
 use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Helpers\AdminIblockHelper;
 use Sprint\Migration\Helpers\AgentHelper;
 use Sprint\Migration\helpers\DeliveryServiceHelper;
 use Sprint\Migration\Helpers\EventHelper;
@@ -40,7 +39,6 @@ use Sprint\Migration\Helpers\UserTypeEntityHelper;
  * @method MedialibExchangeHelper   MedialibExchange()
  * @method IblockExchangeHelper     IblockExchange()
  * @method HlblockExchangeHelper    HlblockExchange()
- * @method AdminIblockHelper        AdminIblock()
  */
 class HelperManager
 {
@@ -48,10 +46,7 @@ class HelperManager
     private static $instance   = null;
     private        $registered = [];
 
-    /**
-     * @return HelperManager
-     */
-    public static function getInstance()
+    public static function getInstance(): HelperManager
     {
         if (!isset(static::$instance)) {
             static::$instance = new static();
@@ -71,6 +66,12 @@ class HelperManager
         return $this->callHelper($name);
     }
 
+    /**
+     * @param $name
+     * @param $class
+     *
+     * @noinspection PhpUnused
+     */
     public function registerHelper($name, $class)
     {
         $this->registered[$name] = $class;
@@ -82,7 +83,7 @@ class HelperManager
      * @throws HelperException
      * @return Helper
      */
-    protected function callHelper($name)
+    protected function callHelper($name): Helper
     {
         if (isset($this->cache[$name])) {
             return $this->cache[$name];

@@ -2,12 +2,10 @@
 
 namespace Sprint\Migration;
 
-
 use Bitrix\Main\Db\SqlQueryException;
 
 class Version20190606000012 extends Version
 {
-
     protected $description = "Пример работы с транзакциями";
 
     /**
@@ -20,11 +18,9 @@ class Version20190606000012 extends Version
         $helper = $this->getHelperManager();
 
         $helper->Sql()->transaction(function () use ($helper) {
-
             $iblockId = $helper->Iblock()->getIblockId('content_news');
 
             $helper->Iblock()->addElement($iblockId, ['NAME' => 'Новость1']);
-
         });
     }
 

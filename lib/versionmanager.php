@@ -2,6 +2,7 @@
 
 namespace Sprint\Migration;
 
+use Bitrix\Main\DB\SqlQueryException;
 use CMain;
 use DirectoryIterator;
 use Exception;
@@ -16,18 +17,18 @@ use Throwable;
 class VersionManager
 {
     /** @var VersionConfig */
-    private $versionConfig = null;
+    private $versionConfig;
     /** @var VersionTable */
-    private $versionTable = null;
+    private $versionTable;
     private $restarts = [];
-    private $lastException = null;
+    private $lastException;
 
     /**
      * VersionManager constructor.
      *
-     * @param string $configName
+     * @param VersionConfig|string $configName
      *
-     * @throws Exception
+     * @throws MigrationException
      */
     public function __construct($configName = '')
     {
@@ -46,18 +47,18 @@ class VersionManager
         $this->lastException = new Exception();
     }
 
-    public function getVersionConfig()
+    public function getVersionConfig(): VersionConfig
     {
         return $this->versionConfig;
     }
 
-    public function getVersionTable()
+    public function getVersionTable(): VersionTable
     {
         return $this->versionTable;
     }
 
     /**
-     * @param        $versionName
+     * @param string $versionName
      * @param string $action
      * @param array  $params
      * @param bool   $force
@@ -66,12 +67,12 @@ class VersionManager
      * @return bool
      */
     public function startMigration(
-        $versionName,
-        $action = VersionEnum::ACTION_UP,
-        $params = [],
-        $force = false,
-        $tag = ''
-    ) {
+        string $versionName,
+        string $action = VersionEnum::ACTION_UP,
+        array $params = [],
+        bool $force = false,
+        string $tag = ''
+    ): bool {
         if (isset($this->restarts[$versionName])) {
             unset($this->restarts[$versionName]);
         }
@@ -117,10 +118,8 @@ class VersionManager
             }
 
             return true;
-        } catch (RestartException $e) {
+        } /** @noinspection PhpRedundantCatchClauseInspection */ catch (RestartException $e) {
             $this->restarts[$versionName] = isset($versionInstance) ? $versionInstance->getRestartParams() : [];
-        } catch (Exception $e) {
-            $this->lastException = $e;
         } catch (Throwable $e) {
             $this->lastException = $e;
         }
@@ -131,7 +130,7 @@ class VersionManager
     /**
      * @param $versionName
      *
-     * @throws MigrationException
+     * @throws SqlQueryException
      * @return array|bool
      */
     public function getVersionByName($versionName)
@@ -149,22 +148,23 @@ class VersionManager
     /**
      * @param array $filter
      *
-     * @throws MigrationException
+     * @throws SqlQueryException
      * @return array
      */
-    public function getVersions($filter = [])
+    public function getVersions(array $filter = []): array
     {
-        /** @var  $versionFilter array */
-        $versionFilter = $this->getVersionConfig()->getVal('version_filter', []);
+        $versionFilter = $this->getVersionConfig()->getValArray('version_filter');
 
         $filter = array_merge(
-            $versionFilter, [
-            'status'   => '',
-            'search'   => '',
-            'tag'      => '',
-            'modified' => '',
-            'older'    => '',
-        ], $filter
+            $versionFilter,
+            [
+                'status'   => '',
+                'search'   => '',
+                'tag'      => '',
+                'modified' => '',
+                'older'    => '',
+            ],
+            $filter
         );
 
         $merge = [];
@@ -188,8 +188,8 @@ class VersionManager
 
         $result = [];
         foreach ($merge as $version => $ts) {
-            $record = isset($records[$version]) ? $records[$version] : 0;
-            $file = isset($files[$version]) ? $files[$version] : 0;
+            $record = $records[$version] ?? 0;
+            $file = $files[$version] ?? 0;
 
             $meta = $this->prepVersionMeta($version, $file, $record);
 
@@ -208,9 +208,9 @@ class VersionManager
         return $result;
     }
 
-    public function needRestart($version)
+    public function needRestart($version): bool
     {
-        return (isset($this->restarts[$version])) ? 1 : 0;
+        return isset($this->restarts[$version]);
     }
 
     public function getRestartParams($version)
@@ -218,20 +218,20 @@ class VersionManager
         return $this->restarts[$version];
     }
 
-    public function getLastException()
+    public function getLastException(): Exception
     {
         return $this->lastException;
     }
 
     /**
-     * @param $name
-     * @param $params
+     * @param string $name
+     * @param array  $params
      *
      * @return bool|AbstractBuilder
      */
-    public function createBuilder($name, $params = [])
+    public function createBuilder(string $name, array $params = [])
     {
-        $builders = $this->getVersionConfig()->getVal('version_builders', []);
+        $builders = $this->getVersionConfig()->getValArray('version_builders');
 
         if (empty($builders[$name])) {
             return false;
@@ -255,13 +255,13 @@ class VersionManager
     }
 
     /**
-     * @param $search
-     * @param $status
+     * @param string $search
+     * @param string $status
      *
-     * @throws MigrationException
+     * @throws SqlQueryException
      * @return array
      */
-    public function markMigration($search, $status)
+    public function markMigration(string $search, string $status): array
     {
         // $search - VersionName | new | installed | unknown
         // $status - new | installed
@@ -272,9 +272,9 @@ class VersionManager
         $result = [];
         if (in_array(
             $status, [
-            VersionEnum::STATUS_NEW,
-            VersionEnum::STATUS_INSTALLED,
-        ]
+                VersionEnum::STATUS_NEW,
+                VersionEnum::STATUS_INSTALLED,
+            ]
         )) {
             if ($this->checkVersionName($search)) {
                 $meta = $this->getVersionByName($search);
@@ -305,28 +305,28 @@ class VersionManager
         return $result;
     }
 
-    public function getVersionFile($versionName)
+    public function getVersionFile(string $versionName): string
     {
         $dir = $this->getVersionConfig()->getVal('migration_dir');
         return $dir . '/' . $versionName . '.php';
     }
 
-    public function checkVersionName($versionName)
+    public function checkVersionName(string $versionName): bool
     {
-        return $this->getVersionTimestamp($versionName) ? true : false;
+        return (bool)$this->getVersionTimestamp($versionName);
     }
 
-    public function getVersionTimestamp($versionName)
+    public function getVersionTimestamp(string $versionName): string
     {
         $matches = [];
         if (preg_match('/20\d{12}/', $versionName, $matches)) {
             return end($matches);
         }
 
-        return false;
+        return '';
     }
 
-    public function getWebDir()
+    public function getWebDir(): string
     {
         $dir = $this->getVersionConfig()->getVal('migration_dir');
         if (strpos($dir, Module::getDocRoot()) === 0) {
@@ -336,9 +336,10 @@ class VersionManager
     }
 
     /**
+     * @throws SqlQueryException
      * @return array
      */
-    public function getRecords()
+    public function getRecords(): array
     {
         $result = [];
 
@@ -361,7 +362,7 @@ class VersionManager
         return $result;
     }
 
-    public function getFiles()
+    public function getFiles(): array
     {
         $dir = $this->getVersionConfig()->getVal('migration_dir');
         $files = [];
@@ -414,23 +415,28 @@ class VersionManager
     }
 
     /**
-     * @param $versionName
+     * @param string $versionName
      *
-     * @throws MigrationException
+     * @throws SqlQueryException
      * @return array
      */
-    public function deleteMigration($versionName)
+    public function deleteMigration(string $versionName): array
     {
         $result = [];
 
         if (in_array(
-            $versionName, [
-            VersionEnum::STATUS_NEW,
-            VersionEnum::STATUS_INSTALLED,
-            VersionEnum::STATUS_UNKNOWN,
-        ]
+            $versionName,
+            [
+                VersionEnum::STATUS_NEW,
+                VersionEnum::STATUS_INSTALLED,
+                VersionEnum::STATUS_UNKNOWN,
+            ]
         )) {
-            $metas = $this->getVersions(['status' => $versionName]);
+            $metas = $this->getVersions(
+                [
+                    'status' => $versionName,
+                ]
+            );
         } elseif ($meta = $this->getVersionByName($versionName)) {
             $metas = [$meta];
         }
@@ -450,21 +456,21 @@ class VersionManager
     }
 
     /**
-     * @param        $versionName
+     * @param string $versionName
      * @param string $tag
      *
-     * @throws MigrationException
+     * @throws SqlQueryException
      * @return array
      */
-    public function setMigrationTag($versionName, $tag = '')
+    public function setMigrationTag(string $versionName, string $tag = ''): array
     {
         $result = [];
 
         if (in_array(
             $versionName, [
-            VersionEnum::STATUS_INSTALLED,
-            VersionEnum::STATUS_UNKNOWN,
-        ]
+                VersionEnum::STATUS_INSTALLED,
+                VersionEnum::STATUS_UNKNOWN,
+            ]
         )) {
             $metas = $this->getVersions(['status' => $versionName]);
         } elseif ($meta = $this->getVersionByName($versionName)) {
@@ -486,13 +492,13 @@ class VersionManager
     }
 
     /**
-     * @param                $versionName
+     * @param string         $versionName
      * @param VersionManager $vmTo
      *
-     * @throws MigrationException
+     * @throws SqlQueryException
      * @return array
      */
-    public function transferMigration($versionName, VersionManager $vmTo)
+    public function transferMigration(string $versionName, VersionManager $vmTo): array
     {
         $result = [];
 
@@ -506,10 +512,10 @@ class VersionManager
 
         if (in_array(
             $versionName, [
-            VersionEnum::STATUS_NEW,
-            VersionEnum::STATUS_INSTALLED,
-            VersionEnum::STATUS_UNKNOWN,
-        ]
+                VersionEnum::STATUS_NEW,
+                VersionEnum::STATUS_INSTALLED,
+                VersionEnum::STATUS_UNKNOWN,
+            ]
         )) {
             $metas = $this->getVersions(['status' => $versionName]);
         } elseif ($versionName == 'all') {
@@ -533,12 +539,13 @@ class VersionManager
     }
 
     /**
-     * @param $meta
-     * @param $status
+     * @param array  $meta
+     * @param string $status
      *
+     * @throws SqlQueryException
      * @return array
      */
-    protected function markMigrationByMeta($meta, $status)
+    protected function markMigrationByMeta(array $meta, string $status): array
     {
         $msg = 'MARK_ERROR3';
         $success = false;
@@ -548,11 +555,10 @@ class VersionManager
                 $this->getVersionTable()->removeRecord($meta);
                 if ($meta['is_file']) {
                     $msg = 'MARK_SUCCESS1';
-                    $success = true;
                 } else {
                     $msg = 'MARK_SUCCESS3';
-                    $success = true;
                 }
+                $success = true;
             } else {
                 $msg = 'MARK_ERROR1';
             }
@@ -572,12 +578,12 @@ class VersionManager
         ];
     }
 
-    protected function isVersionEnabled($meta)
+    protected function isVersionEnabled($meta): bool
     {
         return (isset($meta['enabled']) && $meta['enabled']);
     }
 
-    protected function containsFilterVersion($meta, $filter)
+    protected function containsFilterVersion($meta, $filter): bool
     {
         unset($filter['status']);
         unset($filter['search']);
@@ -594,7 +600,7 @@ class VersionManager
         return true;
     }
 
-    protected function containsFilterTag($meta, $filter)
+    protected function containsFilterTag($meta, $filter): bool
     {
         if (empty($filter['tag'])) {
             return true;
@@ -603,13 +609,13 @@ class VersionManager
         return ($meta['tag'] == $filter['tag']);
     }
 
-    protected function containsFilterModified($meta, $filter)
+    protected function containsFilterModified($meta, $filter): bool
     {
         if (empty($filter['modified'])) {
             return true;
         }
 
-        return ($meta['modified']);
+        return (bool)$meta['modified'];
     }
 
     protected function containsFilterOlder($meta, $filter)
@@ -621,7 +627,7 @@ class VersionManager
         return ($meta['older']);
     }
 
-    protected function containsFilterSearch($meta, $filter)
+    protected function containsFilterSearch($meta, $filter): bool
     {
         if (empty($filter['search'])) {
             return true;
@@ -642,7 +648,7 @@ class VersionManager
         return false;
     }
 
-    protected function containsFilterStatus($meta, $filter)
+    protected function containsFilterStatus($meta, $filter): bool
     {
         if (empty($filter['status'])) {
             return true;
@@ -660,13 +666,12 @@ class VersionManager
      * @param $file
      * @param $record
      *
-     * @throws MigrationException
      * @return array|bool
      */
     protected function prepVersionMeta($versionName, $file, $record)
     {
-        $isFile = ($file) ? 1 : 0;
-        $isRecord = ($record) ? 1 : 0;
+        $isFile = (bool)$file;
+        $isRecord = (bool)$record;
 
         $meta = [
             'is_file'   => $isFile,
@@ -700,7 +705,6 @@ class VersionManager
         $meta['location'] = $file['location'];
 
         try {
-            /** @noinspection PhpIncludeInspection */
             require_once($file['location']);
 
             $class = 'Sprint\Migration\\' . $versionName;
@@ -729,7 +733,6 @@ class VersionManager
             if (!empty($record['hash'])) {
                 $meta['modified'] = ($meta['hash'] != $record['hash']);
             }
-        } catch (Exception $e) {
         } catch (Throwable $e) {
         }
 
@@ -742,30 +745,40 @@ class VersionManager
         return file_exists($file) ? [
             'version'  => $versionName,
             'location' => $file,
-        ] : 0;
+        ] : false;
     }
 
     /**
      * @param $versionName
      *
-     * @return array|false|int
+     * @throws SqlQueryException
+     * @return array|false
      */
     protected function getRecordIfExists($versionName)
     {
         $record = $this->getVersionTable()->getRecord($versionName);
-        return ($record && isset($record['version'])) ? $record : 0;
+        return ($record && isset($record['version'])) ? $record : false;
     }
 
-    protected function purifyDescriptionForMeta($descr = '')
+    protected function purifyDescriptionForMeta(string $descr = ''): string
     {
-        $descr = (string)$descr;
-        $descr = str_replace(["\n\r", "\r\n", "\n", "\r"], ' ', $descr);
-        $descr = strip_tags($descr);
-        $descr = stripslashes($descr);
-        return $descr;
+        return stripslashes(
+            strip_tags(
+                str_replace(
+                    ["\n\r", "\r\n", "\n", "\r"], ' ', $descr
+                )
+            )
+        );
     }
 
-    protected function transferMigrationByMeta($meta, VersionManager $vmTo)
+    /**
+     * @param array          $meta
+     * @param VersionManager $vmTo
+     *
+     * @throws SqlQueryException
+     * @return array
+     */
+    protected function transferMigrationByMeta(array $meta, VersionManager $vmTo): array
     {
         $success = 0;
 
@@ -795,7 +808,13 @@ class VersionManager
         ];
     }
 
-    protected function deleteMigratioByMeta($meta)
+    /**
+     * @param array $meta
+     *
+     * @throws SqlQueryException
+     * @return array
+     */
+    protected function deleteMigratioByMeta(array $meta): array
     {
         $success = 0;
 
@@ -817,7 +836,14 @@ class VersionManager
         ];
     }
 
-    protected function setMigrationTagByMeta($meta, $tag = '')
+    /**
+     * @param array  $meta
+     * @param string $tag
+     *
+     * @throws SqlQueryException
+     * @return array
+     */
+    protected function setMigrationTagByMeta(array $meta, string $tag = ''): array
     {
         $success = 0;
 

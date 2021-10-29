@@ -11,10 +11,12 @@ use Sprint\Migration\Locale;
 
 class OptionHelper extends Helper
 {
-    public function isEnabled()
+    public function isEnabled():bool
     {
         return (
-            class_exists('\Bitrix\Main\ModuleManager') && class_exists('\Bitrix\Main\Entity\DataManager') && class_exists('\Bitrix\Main\Config\Option')
+            class_exists('\Bitrix\Main\ModuleManager')
+            && class_exists('\Bitrix\Main\Entity\DataManager')
+            && class_exists('\Bitrix\Main\Config\Option')
         );
     }
 

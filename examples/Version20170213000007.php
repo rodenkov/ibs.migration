@@ -2,10 +2,8 @@
 
 namespace Sprint\Migration;
 
-
 class Version20170213000007 extends Version
 {
-
     protected $description = "Пример работы с шаблонами сайта";
 
     /**
@@ -18,19 +16,18 @@ class Version20170213000007 extends Version
         //получить список шаблонов
         $helper->Site()->getSiteTemplates('s1');
 
-
         //задать шаблоны
         $helper->Site()->setSiteTemplates('s1', [
 
             //Для папки или файла
             [
                 'TEMPLATE' => 'main',
-                'IN_DIR' => '/auth.php',
+                'IN_DIR'   => '/auth.php',
             ],
 
             //Период времени
             [
-                'TEMPLATE' => 'main',
+                'TEMPLATE'  => 'main',
                 'IN_PERIOD' => ['02.03.2017', '02.05.2017'],
             ],
 
@@ -42,23 +39,22 @@ class Version20170213000007 extends Version
 
             //Параметр в URL
             [
-                'TEMPLATE' => 'main',
+                'TEMPLATE'  => 'main',
                 'GET_PARAM' => ['print' => 'Y'],
             ],
 
             //Выражение PHP
             [
-                'TEMPLATE' => 'main',
+                'TEMPLATE'  => 'main',
                 'CONDITION' => 'empty(1)',
             ],
 
             //Без условия
             [
-                'TEMPLATE' => 'main',
+                'TEMPLATE'  => 'main',
                 'CONDITION' => '',
             ],
         ]);
-
     }
 
     /**
@@ -68,5 +64,4 @@ class Version20170213000007 extends Version
     {
         //your code ...
     }
-
 }

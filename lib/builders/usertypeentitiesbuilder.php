@@ -11,7 +11,7 @@ use Sprint\Migration\VersionBuilder;
 
 class UserTypeEntitiesBuilder extends VersionBuilder
 {
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }
@@ -35,12 +35,12 @@ class UserTypeEntitiesBuilder extends VersionBuilder
         $typeCodes = $this->addFieldAndReturn(
             'type_codes',
             [
-                'title'       => Locale::getMessage('BUILDER_UserTypeEntities_EntityId'),
+                'title' => Locale::getMessage('BUILDER_UserTypeEntities_EntityId'),
                 'placeholder' => '',
-                'width'       => 250,
-                'multiple'    => 1,
-                'items'       => $this->getEntitiesStructure(),
-                'value'       => [],
+                'width' => 250,
+                'multiple' => 1,
+                'items' => $this->getEntitiesStructure(),
+                'value' => [],
             ]
         );
 

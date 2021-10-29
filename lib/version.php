@@ -2,102 +2,49 @@
 
 namespace Sprint\Migration;
 
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Exceptions\RestartException;
+use Bitrix\Main\DB\SqlQueryException;
 use Sprint\Migration\Traits\HelperManagerTrait;
 
-/**
- * Class Version
- * @package Sprint\Migration
- */
-class Version extends ExchangeEntity
+abstract class Version extends ExchangeEntity
 {
     use HelperManagerTrait;
 
-    /**
-     * @var string
-     */
-    protected $description = "";
-    /**
-     * @var string
-     */
+    protected $description   = "";
     protected $moduleVersion = "";
-    /**
-     * @var array
-     */
     protected $versionFilter = [];
-    /**
-     * @var string
-     */
-    protected $storageName = 'default';
+    protected $storageName   = 'default';
 
-    /**
-     * your code for up
-     * @throws RestartException
-     * @throws HelperException
-     * @return bool
-     */
-    public function up()
+    abstract public function up();
+
+    abstract public function down();
+
+    public function isVersionEnabled(): bool
     {
         return true;
     }
 
-    /**
-     * your code for down
-     * @throws RestartException
-     * @throws HelperException
-     * @return bool
-     */
-    public function down()
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isVersionEnabled()
-    {
-        return true;
-    }
-
-    /**
-     * @throws Exceptions\ExchangeException
-     * @return string
-     */
-    public function getVersionName()
+    public function getVersionName(): string
     {
         return $this->getClassName();
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
-    public function getModuleVersion()
+    public function getModuleVersion(): string
     {
         return $this->moduleVersion;
     }
 
-    /**
-     * @return array
-     */
-    public function getVersionFilter()
+    public function getVersionFilter(): array
     {
         return $this->versionFilter;
     }
 
     /**
-     * @param $name
-     * @param $data
-     * @throws Exceptions\ExchangeException
+     * @throws SqlQueryException
      */
     public function saveData($name, $data)
     {
@@ -105,10 +52,7 @@ class Version extends ExchangeEntity
     }
 
     /**
-     * @param $name
-     * @throws Exceptions\ExchangeException
-     * @return mixed|string
-     *
+     * @throws SqlQueryException
      */
     public function getSavedData($name)
     {
@@ -117,29 +61,23 @@ class Version extends ExchangeEntity
 
     /**
      * @param bool $name
-     * @throws Exceptions\ExchangeException
+     *
+     * @throws SqlQueryException
      */
-    public function deleteSavedData($name = false)
+    public function deleteSavedData($name = '')
     {
         $this->getStorageManager()->deleteSavedData($this->getVersionName(), $name);
     }
 
-    /**
-     * @return StorageManager
-     */
-    protected function getStorageManager()
+    protected function getStorageManager(): StorageManager
     {
         return new StorageManager($this->storageName);
     }
 
-    /**
-     * @return ExchangeManager
-     */
-    protected function getExchangeManager()
+    protected function getExchangeManager(): ExchangeManager
     {
         return new ExchangeManager($this);
     }
-
 }
 
 

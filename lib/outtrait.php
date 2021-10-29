@@ -4,7 +4,6 @@ namespace Sprint\Migration;
 
 trait OutTrait
 {
-
     protected function out($msg, ...$vars)
     {
         call_user_func_array(['Sprint\Migration\Out', 'out'], func_get_args());
@@ -84,5 +83,4 @@ trait OutTrait
     {
         call_user_func_array(['Sprint\Migration\Out', 'outMessages'], func_get_args());
     }
-
 }

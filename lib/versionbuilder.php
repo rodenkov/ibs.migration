@@ -2,7 +2,9 @@
 
 namespace Sprint\Migration;
 
+use Bitrix\Main\DB\SqlQueryException;
 use Sprint\Migration\Enum\VersionEnum;
+use Sprint\Migration\Exceptions\MigrationException;
 
 abstract class VersionBuilder extends AbstractBuilder
 {
@@ -50,21 +52,20 @@ abstract class VersionBuilder extends AbstractBuilder
         return $prefix;
     }
 
-    protected function purifyDescription($descr = '')
+    protected function purifyDescription($descr = ''): string
     {
         $descr = strval($descr);
         $descr = str_replace(["\n\r", "\r\n", "\n", "\r"], ' ', $descr);
         $descr = strip_tags($descr);
-        $descr = addslashes($descr);
-        return $descr;
+        return addslashes($descr);
     }
 
-    protected function getVersionFile($versionName)
+    protected function getVersionFile($versionName): string
     {
         return $this->getVersionConfig()->getVal('migration_dir') . '/' . $versionName . '.php';
     }
 
-    protected function getVersionResourceFile($versionName, $name)
+    protected function getVersionResourceFile($versionName, $name): string
     {
         return $this->getVersionConfig()->getVal('migration_dir') . '/' . $versionName . '_files/' . $name;
     }
@@ -73,14 +74,11 @@ abstract class VersionBuilder extends AbstractBuilder
     {
         if (!isset($this->params['~version_name'])) {
             $this->params['~version_name'] = $this->createVersionName();
-            $versionName = $this->params['~version_name'];
-        } else {
-            $versionName = $this->params['~version_name'];
         }
-        return $versionName;
+        return $this->params['~version_name'];
     }
 
-    protected function createVersionName()
+    protected function createVersionName(): string
     {
         return strtr(
             $this->getVersionConfig()->getVal('version_name_template'),
@@ -96,10 +94,11 @@ abstract class VersionBuilder extends AbstractBuilder
      * @param array  $templateVars
      * @param bool   $markAsInstalled
      *
-     * @throws Exceptions\MigrationException
+     * @throws MigrationException
+     * @throws SqlQueryException
      * @return bool|string
      */
-    protected function createVersionFile($templateFile = '', $templateVars = [], $markAsInstalled = true)
+    protected function createVersionFile(string $templateFile = '', array $templateVars = [], bool $markAsInstalled = true)
     {
         $templateVars['description'] = $this->purifyDescription(
             $this->getFieldValue('description')

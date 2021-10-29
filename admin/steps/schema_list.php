@@ -15,9 +15,9 @@ if ($_POST["step_code"] == "schema_list" && check_bitrix_sessid('send_sessid')) 
     $schemas = $schemaManager->getEnabledSchemas();
 
     $defaultSchemas = [];
-//    foreach ($schemas as $schema) {
-//        $defaultSchemas[] = $schema->getName();
-//    }
+    //    foreach ($schemas as $schema) {
+    //        $defaultSchemas[] = $schema->getName();
+    //    }
 
     $schemaChecked = isset($_POST['schema_checked']) ? (array)$_POST['schema_checked'] : $defaultSchemas;
 
@@ -27,8 +27,10 @@ if ($_POST["step_code"] == "schema_list" && check_bitrix_sessid('send_sessid')) 
             <tr>
                 <td class="sp-list-td__buttons">
                     <input data-id="<?= $schema->getName() ?>"
-                           class="sp-schema adm-btn <?php if (in_array($schema->getName(),
-                               $schemaChecked)): ?>adm-btn-active<?php endif ?>"
+                           class="sp-schema adm-btn <?php if (in_array(
+                               $schema->getName(),
+                               $schemaChecked
+                           )): ?>adm-btn-active<?php endif ?>"
                            type="button"
                            value="<?= Locale::getMessage('SELECT_ONE') ?>"
                     />

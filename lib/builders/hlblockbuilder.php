@@ -11,7 +11,7 @@ use Sprint\Migration\VersionBuilder;
 
 class HlblockBuilder extends VersionBuilder
 {
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return $this->getHelperManager()->Hlblock()->isEnabled();
     }

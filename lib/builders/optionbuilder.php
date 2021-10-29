@@ -11,7 +11,7 @@ use Sprint\Migration\VersionBuilder;
 
 class OptionBuilder extends VersionBuilder
 {
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return $this->getHelperManager()->Option()->isEnabled();
     }
@@ -36,12 +36,12 @@ class OptionBuilder extends VersionBuilder
         $moduleIds = $this->addFieldAndReturn(
             'module_id',
             [
-                'title'       => Locale::getMessage('BUILDER_OptionExport_module_id'),
+                'title' => Locale::getMessage('BUILDER_OptionExport_module_id'),
                 'placeholder' => '',
-                'multiple'    => 1,
-                'value'       => [],
-                'width'       => 250,
-                'select'      => $this->getModules(),
+                'multiple' => 1,
+                'value' => [],
+                'width' => 250,
+                'select' => $this->getModules(),
             ]
         );
 

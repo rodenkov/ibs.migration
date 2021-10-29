@@ -10,10 +10,8 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 }
 
 if ($_POST["step_code"] == "schema_export" && check_bitrix_sessid('send_sessid')) {
-
     $params = !empty($_POST['params']) ? $_POST['params'] : [];
     $checked = !empty($_POST['schema_checked']) ? $_POST['schema_checked'] : [];
-
 
     /** @var $versionConfig VersionConfig */
     $schemaManager = new SchemaManager($versionConfig, $params);
@@ -26,9 +24,7 @@ if ($_POST["step_code"] == "schema_export" && check_bitrix_sessid('send_sessid')
 
         $ok = true;
         $error = false;
-
     } catch (RestartException $e) {
-
         $json = json_encode([
             'params' => $schemaManager->getRestartParams(),
         ]);
@@ -38,10 +34,6 @@ if ($_POST["step_code"] == "schema_export" && check_bitrix_sessid('send_sessid')
             schemaExecuteStep('schema_export', <?=$json?>);
         </script>
         <?php
-    } catch (Exception $e) {
-        Out::outError($e->getMessage());
-        $error = true;
-
     } catch (Throwable $e) {
         Out::outError($e->getMessage());
         $error = true;
@@ -51,7 +43,7 @@ if ($_POST["step_code"] == "schema_export" && check_bitrix_sessid('send_sessid')
     foreach ($progress as $type => $val) {
         ?>
         <script>
-            schemaProgress('<?=$type?>',<?=$val?>);
+            schemaProgress('<?=$type?>', <?=$val?>);
         </script>
         <?php
     }
@@ -72,5 +64,4 @@ if ($_POST["step_code"] == "schema_export" && check_bitrix_sessid('send_sessid')
         </script>
         <?php
     }
-
 }

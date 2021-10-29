@@ -14,15 +14,15 @@ abstract class AbstractBuilder extends ExchangeEntity
     private $name;
     /** @var VersionConfig */
     private $versionConfig;
-    private $info          = [
-        'title'       => '',
+    private $info       = [
+        'title' => '',
         'description' => '',
-        'group'       => 'Tools',
+        'group' => 'Tools',
     ];
-    private $fields        = [];
-    private $execStatus    = '';
+    private $fields     = [];
+    private $execStatus = '';
 
-    public function __construct(VersionConfig $versionConfig, $name, $params = [])
+    public function __construct(VersionConfig $versionConfig, string $name, array $params = [])
     {
         $this->versionConfig = $versionConfig;
         $this->name = $name;
@@ -39,7 +39,7 @@ abstract class AbstractBuilder extends ExchangeEntity
      */
     abstract protected function execute();
 
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled(): bool
     {
         return false;
     }
@@ -49,12 +49,12 @@ abstract class AbstractBuilder extends ExchangeEntity
         $this->initialize();
     }
 
-    public function getVersionConfig()
+    public function getVersionConfig(): VersionConfig
     {
         return $this->versionConfig;
     }
 
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         try {
             return $this->isBuilderEnabled();
@@ -98,7 +98,7 @@ abstract class AbstractBuilder extends ExchangeEntity
      * @throws RebuildException
      * @return mixed
      */
-    protected function addFieldAndReturn($code, $param = [])
+    protected function addFieldAndReturn(string $code, array $param = [])
     {
         $this->addField($code, $param);
 
@@ -151,7 +151,6 @@ abstract class AbstractBuilder extends ExchangeEntity
         ob_start();
 
         if (is_file($file)) {
-            /** @noinspection PhpIncludeInspection */
             include $file;
         }
 
@@ -178,17 +177,17 @@ abstract class AbstractBuilder extends ExchangeEntity
         }
     }
 
-    public function isRebuild()
+    public function isRebuild(): bool
     {
         return ($this->execStatus == 'rebuild');
     }
 
-    public function isRestart()
+    public function isRestart(): bool
     {
         return ($this->execStatus == 'restart');
     }
 
-    public function buildExecute()
+    public function buildExecute(): bool
     {
         $this->execStatus = '';
 
@@ -256,75 +255,52 @@ abstract class AbstractBuilder extends ExchangeEntity
         throw new RebuildException('rebuild form');
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getFields()
+    public function getFields(): array
     {
         return $this->fields;
     }
 
-    protected function setTitle($title = '')
+    protected function setTitle(string $title = '')
     {
         $this->info['title'] = $title;
     }
 
-    protected function setDescription($description = '')
+    protected function setDescription(string $description = '')
     {
         $this->info['description'] = $description;
     }
 
-    protected function setGroup($group = '')
+    protected function setGroup(string $group = '')
     {
         $this->info['group'] = $group;
     }
 
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->info['title'];
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->info['description'];
     }
 
-    public function hasDescription()
+    public function hasDescription(): bool
     {
         return !empty($this->info['description']);
     }
 
-    public function getGroup()
+    public function getGroup(): string
     {
         return $this->info['group'];
     }
 
-    /** @param $code
-     * @param array $param
-     *
-     * @deprecated
-     */
-    protected function requiredField($code, $param = [])
-    {
-        $this->addField($code, $param);
-    }
-
-    /** @param $code
-     * @param array $param
-     *
-     * @deprecated
-     */
-    protected function setField($code, $param = [])
-    {
-        $this->addField($code, $param);
-    }
-
-    /**
-     * @return ExchangeManager
-     */
-    protected function getExchangeManager()
+    protected function getExchangeManager(): ExchangeManager
     {
         return new ExchangeManager($this);
     }

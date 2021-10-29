@@ -5,18 +5,18 @@ use Sprint\Migration\Locale;
 $search = '';
 $listview = '';
 
-$getOnclickMenu = function ()  {
+$getOnclickMenu = function () {
     $menu = [];
     $menu[] = [
-        'TEXT' => Locale::getMessage('UP_START_WITH_TAG'),
+        'TEXT'    => Locale::getMessage('UP_START_WITH_TAG'),
         'ONCLICK' => 'migrationMigrationsUpWithTag()',
     ];
     $menu[] = [
-        'TEXT' => Locale::getMessage('DOWN_START'),
+        'TEXT'    => Locale::getMessage('DOWN_START'),
         'ONCLICK' => 'migrationMigrationsDownConfirm()',
     ];
     $menu[] = [
-        'TEXT' => Locale::getMessage('DELETE_UNKNOWN'),
+        'TEXT'    => Locale::getMessage('DELETE_UNKNOWN'),
         'ONCLICK' => 'migrationMigrationsDeleteUnknownConfirm()',
     ];
     return CUtil::PhpToJSObject($menu);

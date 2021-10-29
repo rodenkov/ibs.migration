@@ -60,12 +60,8 @@ class VersionConfig
      *
      * @throws MigrationException
      */
-    public function __construct($configName = '', $configValues = [])
+    public function __construct(string $configName = '', array $configValues = [])
     {
-        if (!is_string($configName) || !is_array($configValues)) {
-            throw new MigrationException("Config params error");
-        }
-
         if (!empty($configName) && !empty($configValues)) {
             $this->initializeByValues($configName, $configValues);
         } else {
@@ -126,36 +122,30 @@ class VersionConfig
     }
 
     /**
-     * @param false $key
+     * @param string $key
      *
      * @return mixed
      */
-    public function getCurrent($key = false)
+    public function getCurrent(string $key)
     {
-        return ($key) ? $this->configList[$this->configCurrent][$key] : $this->configList[$this->configCurrent];
+        return $this->configList[$this->configCurrent][$key];
     }
 
-    /**
-     * @return array
-     */
-    public function getList()
+    public function getList(): array
     {
         return $this->configList;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getName()
+    public function getName(): string
     {
-        return $this->configList[$this->configCurrent]['name'];
+        return (string)$this->getCurrent('name');
     }
 
     /**
      * @throws MigrationException
      * @return array
      */
-    protected function searchConfigs()
+    protected function searchConfigs(): array
     {
         $result = [];
         $directory = new DirectoryIterator(Module::getPhpInterfaceDir());
@@ -169,7 +159,6 @@ class VersionConfig
                 continue;
             }
 
-            /** @noinspection PhpIncludeInspection */
             $values = include $item->getPathname();
             if (!$this->isValuesValid($values)) {
                 continue;
@@ -184,22 +173,17 @@ class VersionConfig
     /**
      * @param $fileName
      *
-     * @return false|mixed
+     * @return string
      */
-    protected function getConfigName($fileName)
+    protected function getConfigName($fileName): string
     {
         if (preg_match('/^migrations\.([a-z0-9_-]*)\.php$/i', $fileName, $matches)) {
             return $matches[1];
         }
-        return false;
+        return '';
     }
 
-    /**
-     * @param $values
-     *
-     * @return bool
-     */
-    protected function isValuesValid($values)
+    protected function isValuesValid(array $values): bool
     {
         foreach ($this->availablekeys as $key) {
             if (isset($values[$key])) {
@@ -210,14 +194,14 @@ class VersionConfig
     }
 
     /**
-     * @param       $configName
-     * @param array $configValues
-     * @param false $file
+     * @param string $configName
+     * @param array  $configValues
+     * @param string $file
      *
      * @throws MigrationException
      * @return array
      */
-    protected function prepare($configName, $configValues = [], $file = false)
+    protected function prepare(string $configName, array $configValues = [], string $file = ''): array
     {
         $configValues = $this->prepareValues($configValues);
 
@@ -254,9 +238,9 @@ class VersionConfig
      * @param array $values
      *
      * @throws MigrationException
-     * @return array|mixed
+     * @return array
      */
-    protected function prepareValues($values = [])
+    protected function prepareValues(array $values = []): array
     {
         if (empty($values['migration_extend_class'])) {
             $values['migration_extend_class'] = 'Version';
@@ -274,10 +258,8 @@ class VersionConfig
 
         if (!is_dir($values['migration_dir'])) {
             Module::createDir($values['migration_dir']);
-            $values['migration_dir'] = realpath($values['migration_dir']);
-        } else {
-            $values['migration_dir'] = realpath($values['migration_dir']);
         }
+        $values['migration_dir'] = realpath($values['migration_dir']);
 
         if (empty($values['version_prefix'])) {
             $values['version_prefix'] = 'Version';
@@ -338,12 +320,7 @@ class VersionConfig
         return $values;
     }
 
-    /**
-     * @param array $values
-     *
-     * @return array|mixed
-     */
-    public function humanValues($values = [])
+    public function humanValues(array $values = []): array
     {
         foreach ($values as $key => $val) {
             if ($val === true || $val === false) {
@@ -361,34 +338,31 @@ class VersionConfig
         return $values;
     }
 
-    /**
-     * @param        $name
-     * @param string $default
-     *
-     * @return bool|mixed|string
-     */
-    public function getVal($name, $default = '')
+    public function getVal(string $name): string
     {
         $values = $this->configList[$this->configCurrent]['values'];
+        return (string)($values[$name] ?? '');
+    }
 
-        if (isset($values[$name])) {
-            if (is_bool($values[$name])) {
-                return $values[$name];
-            } elseif (!empty($values[$name])) {
-                return $values[$name];
-            }
-        }
+    public function getValArray(string $name): array
+    {
+        $values = $this->configList[$this->configCurrent]['values'];
+        return (array)($values[$name] ?? []);
+    }
 
-        return $default;
+    public function getValBool(string $name): bool
+    {
+        $values = $this->configList[$this->configCurrent]['values'];
+        return (bool)($values[$name] ?? false);
     }
 
     /**
-     * @param       $configName
-     * @param array $configValues
+     * @param string $configName
+     * @param array  $configValues
      *
      * @return bool
      */
-    public function createConfig($configName, $configValues = [])
+    public function createConfig(string $configName, array $configValues = []): bool
     {
         $fileName = 'migrations.' . $configName . '.php';
         if (!$this->getConfigName($fileName)) {
@@ -420,12 +394,9 @@ class VersionConfig
     }
 
     /**
-     * @param $configName
-     *
      * @throws Exception
-     * @return bool
      */
-    public function deleteConfig($configName)
+    public function deleteConfig(string $configName): bool
     {
         $fileName = 'migrations.' . $configName . '.php';
         if (!$this->getConfigName($fileName)) {
@@ -449,13 +420,13 @@ class VersionConfig
     }
 
     /**
-     * @param        $dirname
+     * @param string $dirname
      * @param false  $relative
      * @param string $configName
      *
-     * @return false|string|string[]
+     * @return string
      */
-    public function getSiblingDir($dirname, $relative = false, $configName = VersionEnum::CONFIG_DEFAULT)
+    public function getSiblingDir(string $dirname, bool $relative = false, string $configName = VersionEnum::CONFIG_DEFAULT): string
     {
         $def = $this->configList[$configName];
         $dir = rtrim($def['values']['migration_dir'], '/');
@@ -464,12 +435,7 @@ class VersionConfig
         return ($relative) ? Module::getRelativeDir($dir) : $dir;
     }
 
-    /**
-     * @param $configName
-     *
-     * @return int
-     */
-    protected function getSort($configName)
+    protected function getSort($configName): int
     {
         if ($configName == VersionEnum::CONFIG_ARCHIVE) {
             return 110;
@@ -480,10 +446,7 @@ class VersionConfig
         }
     }
 
-    /**
-     * @return string[]
-     */
-    protected function getDefaultBuilders()
+    protected function getDefaultBuilders(): array
     {
         return [
             'UserGroupBuilder'        => UserGroupBuilder::class,
@@ -506,10 +469,7 @@ class VersionConfig
         ];
     }
 
-    /**
-     * @return string[]
-     */
-    protected function getDefaultSchemas()
+    protected function getDefaultSchemas(): array
     {
         return [
             'IblockSchema'           => IblockSchema::class,

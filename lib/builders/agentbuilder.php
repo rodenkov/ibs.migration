@@ -8,8 +8,7 @@ use Sprint\Migration\VersionBuilder;
 
 class AgentBuilder extends VersionBuilder
 {
-
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }
@@ -21,7 +20,6 @@ class AgentBuilder extends VersionBuilder
 
         $this->addVersionFields();
     }
-
 
     protected function execute()
     {
@@ -59,7 +57,6 @@ class AgentBuilder extends VersionBuilder
                 'items' => $items,
             ]
         );
-
     }
 
     protected function getAgents()
@@ -77,6 +74,5 @@ class AgentBuilder extends VersionBuilder
         }
 
         return $result;
-
     }
 }

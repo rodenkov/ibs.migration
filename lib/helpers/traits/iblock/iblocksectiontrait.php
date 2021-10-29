@@ -85,7 +85,7 @@ trait IblockSectionTrait
      * Сохраняет категорию инфоблока
      * Создаст если не было, обновит если существует (поиск по коду)
      *
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $fields
      *
      * @throws HelperException
@@ -106,7 +106,7 @@ trait IblockSectionTrait
     /**
      * Добавляет секцию инфоблока если она не существует
      *
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $fields
      *
      * @throws HelperException
@@ -162,7 +162,7 @@ trait IblockSectionTrait
     /**
      * Обновляет секцию инфоблока если она существует
      *
-     * @param $iblockId
+     * @param       $iblockId
      * @param array $fields
      *
      * @throws HelperException

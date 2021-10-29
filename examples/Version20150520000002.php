@@ -6,7 +6,6 @@ use CIBlockElement;
 
 class Version20150520000002 extends Version
 {
-
     protected $description = "Пошаговая миграция";
 
     /**
@@ -36,7 +35,6 @@ class Version20150520000002 extends Version
 
             $this->restart();
         }
-
     }
 
     /**
@@ -65,7 +63,5 @@ class Version20150520000002 extends Version
         if ($bFound) {
             $this->restart();
         }
-
     }
-
 }

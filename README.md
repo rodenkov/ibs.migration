@@ -1,4 +1,5 @@
 # Миграции для разработчиков (1С-Битрикс) #
+
 [![Latest Stable Version](https://poser.pugx.org/andreyryabin/sprint.migration/v/stable.svg)](https://packagist.org/packages/andreyryabin/sprint.migration/)
 [![Total Downloads](https://img.shields.io/packagist/dt/andreyryabin/sprint.migration.svg?style=flat)](https://packagist.org/packages/andreyryabin/sprint.migration)
 
@@ -26,6 +27,7 @@
 Установка через composer
 -------------------------
 Пример вашего composer.json с установкой модуля в local/modules/
+
 ```
 {
   "extra": {
@@ -42,11 +44,10 @@
 
 Консоль
 -------------------------
-Для работы через консоль используется скрипт 
+Для работы через консоль используется скрипт
 `/bitrix/modules/sprint.migration/tools/migrate.php`
 
-Можно запускать его напрямую или сделать алиас, 
-создав файл в корне проекта, `bin/migrate` и прописав в нем:
+Можно запускать его напрямую или сделать алиас, создав файл в корне проекта, `bin/migrate` и прописав в нем:
 
 ```
 #!/usr/bin/env php
@@ -57,11 +58,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/sprint.migration/tools
 
 ```
 
-
 Консоль symfony
 -------------------------
-Если у вас используется связка bitrix + symfony, то можно подключить 
-модуль как бандл симфони и запускать консольные команды модуля через 
+Если у вас используется связка bitrix + symfony, то можно подключить модуль как бандл симфони и запускать консольные команды модуля через
 
 `php bin/console sprint:migration`
 
@@ -86,9 +85,10 @@ public function registerBundles()
 
 Примеры команд
 -------------------------
+
 * php bin/migrate add (создать новую миграцию)
 * php bin/migrate ls  (показать список миграций )
-* php bin/migrate up (накатить все миграции) 
+* php bin/migrate up (накатить все миграции)
 * php bin/migrate up [version] (накатить выбранную миграцию)
 * php bin/migrate down (откатить все миграции)
 * php bin/migrate down [version] (откатить выбранную миграцию)

@@ -4,7 +4,6 @@ namespace Sprint\Migration\Helpers\Traits\UserOptions;
 
 trait UserGroupTrait
 {
-
     public function getUserGroupGridId()
     {
         return 'tbl_user_group';
@@ -35,5 +34,4 @@ trait UserGroupTrait
     {
         return $this->saveGrid($this->getUserGroupGridId(), $params);
     }
-
 }

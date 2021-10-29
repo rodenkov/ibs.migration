@@ -6,11 +6,9 @@ use Sprint\Migration\AbstractBuilder;
 use Sprint\Migration\Locale;
 use function BXClearCache;
 
-
 class CacheCleanerBuilder extends AbstractBuilder
 {
-
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }

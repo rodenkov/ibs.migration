@@ -22,7 +22,7 @@ trait IblockPropertyTrait
      * @throws HelperException
      * @return bool|mixed
      */
-    public function saveProperty($iblockId, $fields)
+    public function saveProperty($iblockId, array $fields)
     {
         $this->checkRequiredKeys(__METHOD__, $fields, ['CODE']);
 
@@ -80,12 +80,12 @@ trait IblockPropertyTrait
     /**
      * Получает свойство инфоблока
      *
-     * @param $iblockId
-     * @param $code int|array - код или фильтр
+     * @param int          $iblockId
+     * @param string|array $code
      *
      * @return array|bool
      */
-    public function getProperty($iblockId, $code)
+    public function getProperty(int $iblockId, $code)
     {
         /** @compatibility filter or code */
         $filter = is_array($code)
@@ -108,7 +108,7 @@ trait IblockPropertyTrait
      *
      * @return array
      */
-    public function getPropertyEnums($filter = [])
+    public function getPropertyEnums(array $filter = []): array
     {
         $result = [];
         $dbres = CIBlockPropertyEnum::GetList(
@@ -123,7 +123,7 @@ trait IblockPropertyTrait
         return $result;
     }
 
-    public function getPropertyFeatures($propertyId)
+    public function getPropertyFeatures($propertyId): array
     {
         if (!class_exists('\Bitrix\Iblock\Model\PropertyFeature')) {
             return [];
@@ -149,12 +149,13 @@ trait IblockPropertyTrait
     /**
      * Получает значения списков для свойства инфоблока
      *
-     * @param $iblockId
-     * @param $propertyId
+     * @param int $iblockId
+     * @param int $propertyId
      *
      * @return array
+     * @noinspection PhpUnused
      */
-    public function getPropertyEnumValues($iblockId, $propertyId)
+    public function getPropertyEnumValues(int $iblockId, int $propertyId): array
     {
         return $this->getPropertyEnums(
             [
@@ -167,12 +168,12 @@ trait IblockPropertyTrait
     /**
      * Получает свойство инфоблока
      *
-     * @param $iblockId
-     * @param $code int|array - код или фильтр
+     * @param int          $iblockId
+     * @param string|array $code - код или фильтр
      *
      * @return int
      */
-    public function getPropertyId($iblockId, $code)
+    public function getPropertyId(int $iblockId, $code): int
     {
         $item = $this->getProperty($iblockId, $code);
         return ($item && isset($item['ID'])) ? $item['ID'] : 0;
@@ -181,12 +182,12 @@ trait IblockPropertyTrait
     /**
      * Получает свойства инфоблока
      *
-     * @param       $iblockId
+     * @param int   $iblockId
      * @param array $filter
      *
      * @return array
      */
-    public function getProperties($iblockId, $filter = [])
+    public function getProperties(int $iblockId, array $filter = []): array
     {
         $filter['IBLOCK_ID'] = $iblockId;
         $filter['CHECK_PERMISSIONS'] = 'N';
@@ -219,10 +220,11 @@ trait IblockPropertyTrait
      * @param int   $iblockId
      * @param array $fields
      *
+     * @noinspection PhpUnused
      * @throws HelperException
-     * @return bool
+     * @return int
      */
-    public function addPropertyIfNotExists($iblockId, $fields)
+    public function addPropertyIfNotExists(int $iblockId, array $fields): int
     {
         $this->checkRequiredKeys(__METHOD__, $fields, ['CODE']);
 
@@ -413,34 +415,6 @@ trait IblockPropertyTrait
     }
 
     /**
-     * Получает свойство инфоблока
-     * Данные подготовлены для экспорта в миграцию или схему
-     *
-     * @param      $iblockId
-     * @param bool $code
-     *
-     * @throws HelperException
-     * @return array|void
-     */
-    public function exportProperty($iblockId, $code = false)
-    {
-        $export = $this->prepareExportProperty(
-            $this->getProperty($iblockId, $code)
-        );
-
-        if (!empty($export['CODE'])) {
-            return $export;
-        }
-
-        $this->throwException(
-            __METHOD__,
-            Locale::getMessage(
-                'ERR_IB_PROPERTY_CODE_NOT_FOUND'
-            )
-        );
-    }
-
-    /**
      * Получает свойства инфоблока
      * Данные подготовлены для экспорта в миграцию или схему
      *
@@ -449,7 +423,7 @@ trait IblockPropertyTrait
      *
      * @return array
      */
-    public function exportProperties($iblockId, $filter = [])
+    public function exportProperties($iblockId, array $filter = []): array
     {
         $exports = [];
         $items = $this->getProperties($iblockId, $filter);
@@ -466,33 +440,6 @@ trait IblockPropertyTrait
             }
         }
         return $exports;
-    }
-
-    /**
-     * @param $iblockId
-     * @param $code
-     *
-     * @throws HelperException
-     * @return bool
-     * @deprecated
-     */
-    public function deleteProperty($iblockId, $code)
-    {
-        return $this->deletePropertyIfExists($iblockId, $code);
-    }
-
-    /**
-     * @param $iblockId
-     * @param $code
-     * @param $fields
-     *
-     * @throws HelperException
-     * @return bool|mixed
-     * @deprecated
-     */
-    public function updateProperty($iblockId, $code, $fields)
-    {
-        return $this->updatePropertyIfExists($iblockId, $code, $fields);
     }
 
     public function getPropertyType($iblockId, $code)

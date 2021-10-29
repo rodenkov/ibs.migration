@@ -14,7 +14,7 @@ class IblockCategoryBuilder extends VersionBuilder
     /**
      * @return bool
      */
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return $this->getHelperManager()->Iblock()->isEnabled();
     }

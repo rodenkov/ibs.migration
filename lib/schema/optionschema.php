@@ -26,7 +26,7 @@ class OptionSchema extends AbstractSchema
     /**
      * @return bool
      */
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return $this->getHelperManager()->Option()->isEnabled();
     }
@@ -35,8 +35,8 @@ class OptionSchema extends AbstractSchema
     {
         $schemas = $this->loadSchemas(
             'options/', [
-            'items' => [],
-        ]
+                'items' => [],
+            ]
         );
 
         $cnt = 0;
@@ -75,8 +75,8 @@ class OptionSchema extends AbstractSchema
 
             $this->saveSchema(
                 'options/' . $module['ID'], [
-                'items' => $exportItems,
-            ]
+                    'items' => $exportItems,
+                ]
             );
         }
     }
@@ -85,8 +85,8 @@ class OptionSchema extends AbstractSchema
     {
         $schemas = $this->loadSchemas(
             'options/', [
-            'items' => [],
-        ]
+                'items' => [],
+            ]
         );
 
         foreach ($schemas as $schema) {

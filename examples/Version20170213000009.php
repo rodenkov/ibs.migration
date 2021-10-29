@@ -2,10 +2,8 @@
 
 namespace Sprint\Migration;
 
-
 class Version20170213000009 extends Version
 {
-
     protected $description = "Пример работы с почтовыми шаблонами";
 
     /**
@@ -17,29 +15,27 @@ class Version20170213000009 extends Version
         $helper = $this->getHelperManager();
 
         $helper->Event()->saveEventType('NEW_MATERIAL', [
-            'LID' => 'ru',
-            'NAME' => 'Добавлен новый материал',
+            'LID'         => 'ru',
+            'NAME'        => 'Добавлен новый материал',
             'DESCRIPTION' => $this->getDesc(),
         ]);
 
         $helper->Event()->saveEventType('NEW_MATERIAL', [
-            'LID' => 'en',
-            'NAME' => 'Добавлен новый материал',
+            'LID'         => 'en',
+            'NAME'        => 'Добавлен новый материал',
             'DESCRIPTION' => $this->getDesc(),
         ]);
 
-
         $helper->Event()->saveEventMessage('NEW_MATERIAL', [
-            'ACTIVE' => 'Y',
-            'LID' => 's1',
+            'ACTIVE'     => 'Y',
+            'LID'        => 's1',
             'EMAIL_FROM' => '#DEFAULT_EMAIL_FROM#',
-            'EMAIL_TO' => 'user@example.com',
-            'BCC' => '',
-            'SUBJECT' => 'Добавлен новый материал',
-            'BODY_TYPE' => 'text',
-            'MESSAGE' => $this->getMessage(),
+            'EMAIL_TO'   => 'user@example.com',
+            'BCC'        => '',
+            'SUBJECT'    => 'Добавлен новый материал',
+            'BODY_TYPE'  => 'text',
+            'MESSAGE'    => $this->getMessage(),
         ]);
-
     }
 
     /**
@@ -49,7 +45,6 @@ class Version20170213000009 extends Version
     {
         //your code ...
     }
-
 
     private function getDesc()
     {

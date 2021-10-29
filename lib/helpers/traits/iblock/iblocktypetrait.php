@@ -9,10 +9,11 @@ use Sprint\Migration\Locale;
 
 trait IblockTypeTrait
 {
-
     /**
      * Получает тип инфоблока, бросает исключение если его не существует
+     *
      * @param $typeId
+     *
      * @throws HelperException
      * @return array|void
      */
@@ -33,7 +34,9 @@ trait IblockTypeTrait
 
     /**
      * Получает id типа инфоблока, бросает исключение если его не существует
+     *
      * @param $typeId
+     *
      * @throws HelperException
      * @return int|void
      */
@@ -52,18 +55,21 @@ trait IblockTypeTrait
         );
     }
 
-
     /**
      * Получает тип инфоблока
+     *
      * @param $typeId
+     *
      * @return array
      */
     public function getIblockType($typeId)
     {
         /** @compatibility filter or $typeId */
-        $filter = is_array($typeId) ? $typeId : [
-            '=ID' => $typeId,
-        ];
+        $filter = is_array($typeId)
+            ? $typeId
+            : [
+                '=ID' => $typeId,
+            ];
 
         $filter['CHECK_PERMISSIONS'] = 'N';
         $item = CIBlockType::GetList(['SORT' => 'ASC'], $filter)->Fetch();
@@ -77,7 +83,9 @@ trait IblockTypeTrait
 
     /**
      * Получает id типа инфоблока
+     *
      * @param $typeId
+     *
      * @return int|mixed
      */
     public function getIblockTypeId($typeId)
@@ -88,7 +96,9 @@ trait IblockTypeTrait
 
     /**
      * Получает типы инфоблоков
+     *
      * @param array $filter
+     *
      * @return array
      */
     public function getIblockTypes($filter = [])
@@ -106,7 +116,9 @@ trait IblockTypeTrait
 
     /**
      * Добавляет тип инфоблока, если его не существует
+     *
      * @param array $fields
+     *
      * @throws HelperException
      * @return mixed
      */
@@ -124,25 +136,27 @@ trait IblockTypeTrait
 
     /**
      * Добавляет тип инфоблока
+     *
      * @param array $fields
+     *
      * @throws HelperException
      * @return int|void
      */
     public function addIblockType($fields = [])
     {
         $default = [
-            'ID' => '',
+            'ID'       => '',
             'SECTIONS' => 'Y',
-            'IN_RSS' => 'N',
-            'SORT' => 100,
-            'LANG' => [
+            'IN_RSS'   => 'N',
+            'SORT'     => 100,
+            'LANG'     => [
                 'ru' => [
-                    'NAME' => 'Catalog',
+                    'NAME'         => 'Catalog',
                     'SECTION_NAME' => 'Sections',
                     'ELEMENT_NAME' => 'Elements',
                 ],
                 'en' => [
-                    'NAME' => 'Catalog',
+                    'NAME'         => 'Catalog',
                     'SECTION_NAME' => 'Sections',
                     'ELEMENT_NAME' => 'Elements',
                 ],
@@ -161,8 +175,10 @@ trait IblockTypeTrait
 
     /**
      * Обновляет тип инфоблока
-     * @param $iblockTypeId
+     *
+     * @param       $iblockTypeId
      * @param array $fields
+     *
      * @throws HelperException
      * @return int|void
      */
@@ -178,7 +194,9 @@ trait IblockTypeTrait
 
     /**
      * Удаляет тип инфоблока, если существует
+     *
      * @param $typeId
+     *
      * @throws HelperException
      * @return bool
      */
@@ -190,12 +208,13 @@ trait IblockTypeTrait
         }
 
         return $this->deleteIblockType($iblockType['ID']);
-
     }
 
     /**
      * Удаляет тип инфоблока
+     *
      * @param $typeId
+     *
      * @throws HelperException
      * @return bool|void
      */
@@ -217,7 +236,9 @@ trait IblockTypeTrait
 
     /**
      * Получает языковые названия для типа инфоблока
+     *
      * @param $typeId
+     *
      * @return array
      */
     public function getIblockTypeLangs($typeId)
@@ -231,7 +252,7 @@ trait IblockTypeTrait
             $values = CIBlockType::GetByIDLang($typeId, $item['LID'], false);
             if (!empty($values)) {
                 $result[$item['LID']] = [
-                    'NAME' => $values['NAME'],
+                    'NAME'         => $values['NAME'],
                     'SECTION_NAME' => $values['SECTION_NAME'],
                     'ELEMENT_NAME' => $values['ELEMENT_NAME'],
                 ];
@@ -243,7 +264,9 @@ trait IblockTypeTrait
     /**
      * Сохраняет тип инфоблока
      * Создаст если не было, обновит если существует и отличается
+     *
      * @param array $fields
+     *
      * @throws HelperException
      * @return bool|mixed
      */
@@ -268,7 +291,6 @@ trait IblockTypeTrait
             );
             return $ok;
         }
-
 
         if ($this->hasDiff($exists, $fields)) {
             $ok = $this->getMode('test') ? true : $this->updateIblockType($item['ID'], $fields);
@@ -304,7 +326,9 @@ trait IblockTypeTrait
     /**
      * Получает тип инфоблока
      * Данные подготовлены для экспорта в миграцию или схему
+     *
      * @param $typeId
+     *
      * @return mixed
      */
     public function exportIblockType($typeId)
@@ -312,28 +336,6 @@ trait IblockTypeTrait
         return $this->prepareExportIblockType(
             $this->getIblockType($typeId)
         );
-    }
-
-    /**
-     * @param $typeId
-     * @throws HelperException
-     * @return array
-     * @deprecated
-     */
-    public function findIblockType($typeId)
-    {
-        return $this->getIblockTypeIfExists($typeId);
-    }
-
-    /**
-     * @param $typeId
-     * @throws HelperException
-     * @return mixed
-     * @deprecated
-     */
-    public function findIblockTypeId($typeId)
-    {
-        return $this->getIblockTypeIdIfExists($typeId);
     }
 
     protected function prepareExportIblockType($item)

@@ -4,7 +4,6 @@ namespace Sprint\Migration;
 
 class Version20170213000006 extends Version
 {
-
     protected $description = "Пример работы с highload-блоками # 2";
 
     /**
@@ -52,7 +51,5 @@ class Version20170213000006 extends Version
             ]
         );
         $helper->Hlblock()->deleteHlblock($hlblockId);
-
     }
-
 }

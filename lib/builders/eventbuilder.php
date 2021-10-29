@@ -2,6 +2,7 @@
 
 namespace Sprint\Migration\Builders;
 
+use Sprint\Migration\Exceptions\MigrationException;
 use Sprint\Migration\Exceptions\RebuildException;
 use Sprint\Migration\Locale;
 use Sprint\Migration\Module;
@@ -9,8 +10,7 @@ use Sprint\Migration\VersionBuilder;
 
 class EventBuilder extends VersionBuilder
 {
-
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }
@@ -25,27 +25,26 @@ class EventBuilder extends VersionBuilder
 
     /**
      * @throws RebuildException
-     * @throws \Sprint\Migration\Exceptions\MigrationException
+     * @throws MigrationException
      */
     protected function execute()
     {
         $helper = $this->getHelperManager();
 
         $eventTypes = $this->addFieldAndReturn('event_types', [
-            'title' => Locale::getMessage('BUILDER_EventExport_event_types'),
-            'width' => 350,
-            'select' => $this->getEventTypesStructure(),
+            'title'    => Locale::getMessage('BUILDER_EventExport_event_types'),
+            'width'    => 350,
+            'select'   => $this->getEventTypesStructure(),
             'multiple' => 1,
         ]);
 
         $result = [];
         foreach ($eventTypes as $eventName) {
-
             $types = $helper->Event()->exportEventTypes($eventName);
             $messages = $helper->Event()->exportEventMessages($eventName);
 
             $result[$eventName] = [
-                'types' => $types,
+                'types'    => $types,
                 'messages' => $messages,
             ];
         }
@@ -57,7 +56,6 @@ class EventBuilder extends VersionBuilder
             ]
         );
     }
-
 
     /**
      * @return array
@@ -80,5 +78,4 @@ class EventBuilder extends VersionBuilder
 
         return $structure;
     }
-
 }

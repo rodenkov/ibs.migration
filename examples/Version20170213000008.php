@@ -2,10 +2,8 @@
 
 namespace Sprint\Migration;
 
-
 class Version20170213000008 extends Version
 {
-
     protected $description = "Пример работы миграции с сохранением промежуточных данных в бд";
 
     /**
@@ -17,7 +15,7 @@ class Version20170213000008 extends Version
         //сохраняем данные этой миграции
         $this->saveData('var1', '1234567');
         $this->saveData('var2', [
-            'bbb' => 'axcx',
+            'bbb'  => 'axcx',
             'bbbb' => 'axcx',
         ]);
 
@@ -34,7 +32,6 @@ class Version20170213000008 extends Version
         //получаем сохраненные данные какой-либо другой миграции
         $storage = $this->getStorageManager();
         $var1 = $storage->getSavedData('Version20170213000007', 'var1');
-
     }
 
     /**
@@ -44,5 +41,4 @@ class Version20170213000008 extends Version
     {
         //your code ...
     }
-
 }

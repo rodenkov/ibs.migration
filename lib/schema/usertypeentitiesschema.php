@@ -2,13 +2,13 @@
 
 namespace Sprint\Migration\Schema;
 
+use Exception;
 use Sprint\Migration\AbstractSchema;
 use Sprint\Migration\Exceptions\HelperException;
 use Sprint\Migration\Locale;
 
 class UserTypeEntitiesSchema extends AbstractSchema
 {
-
     private $transforms = [];
 
     protected function initialize()
@@ -21,7 +21,7 @@ class UserTypeEntitiesSchema extends AbstractSchema
         return ['user_type_entities'];
     }
 
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return true;
     }
@@ -44,7 +44,7 @@ class UserTypeEntitiesSchema extends AbstractSchema
 
     /**
      * @throws HelperException
-     * @throws \Exception
+     * @throws Exception
      */
     public function export()
     {
@@ -56,7 +56,6 @@ class UserTypeEntitiesSchema extends AbstractSchema
         $this->saveSchema('user_type_entities', [
             'items' => $exportItems,
         ]);
-
     }
 
     /**
@@ -72,7 +71,6 @@ class UserTypeEntitiesSchema extends AbstractSchema
             $this->addToQueue('saveUserTypeEntity', $item);
         }
 
-
         $skip = [];
         foreach ($schemaItems['items'] as $item) {
             $skip[] = $this->getUniqEntity($item);
@@ -81,9 +79,9 @@ class UserTypeEntitiesSchema extends AbstractSchema
         $this->addToQueue('clearUserTypeEntities', $skip);
     }
 
-
     /**
      * @param $fields
+     *
      * @throws HelperException
      */
     protected function saveUserTypeEntity($fields)
@@ -95,6 +93,7 @@ class UserTypeEntitiesSchema extends AbstractSchema
 
     /**
      * @param array $skip
+     *
      * @throws HelperException
      */
     protected function clearUserTypeEntities($skip = [])
@@ -106,10 +105,12 @@ class UserTypeEntitiesSchema extends AbstractSchema
         foreach ($olds as $old) {
             $uniq = $this->getUniqEntity($old);
             if (!in_array($uniq, $skip)) {
-                $ok = ($this->testMode) ? true : $helper->UserTypeEntity()->deleteUserTypeEntity(
-                    $old['ENTITY_ID'],
-                    $old['FIELD_NAME']
-                );
+                $ok = ($this->testMode)
+                    ? true
+                    : $helper->UserTypeEntity()->deleteUserTypeEntity(
+                        $old['ENTITY_ID'],
+                        $old['FIELD_NAME']
+                    );
 
                 $this->outWarningIf(
                     $ok,
@@ -126,6 +127,7 @@ class UserTypeEntitiesSchema extends AbstractSchema
 
     /**
      * @param $item
+     *
      * @throws HelperException
      * @return string
      */
@@ -151,5 +153,4 @@ class UserTypeEntitiesSchema extends AbstractSchema
         }
         return $filtered;
     }
-
 }

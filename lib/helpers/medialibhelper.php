@@ -28,7 +28,7 @@ class MedialibHelper extends Helper
         CMedialib::Init();
     }
 
-    public function isEnabled()
+    public function isEnabled():bool
     {
         return $this->checkModules(['fileman']);
     }
@@ -84,7 +84,14 @@ class MedialibHelper extends Helper
 
         if (isset($params['filter']['NAME'])) {
             //чистим результаты нечеткого поиска
-            return $this->filterByKey($result, 'NAME', $params['filter']['NAME']);
+            return array_values(
+                array_filter(
+                    $result,
+                    function ($item) use ($params) {
+                        return ($item['NAME'] == $params['filter']['NAME']);
+                    }
+                )
+            );
         }
         return $result;
     }

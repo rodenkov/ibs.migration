@@ -7,7 +7,6 @@ use Bitrix\Main\LoaderException;
 use CDBResult;
 use CMain;
 use ReflectionClass;
-use ReflectionException;
 use Sprint\Migration\Exceptions\HelperException;
 
 class Helper
@@ -30,13 +29,8 @@ class Helper
         outDiffIf as protected;
     }
 
-    /**
-     * @var string
-     * @deprecated
-     */
-    public  $lastError = '';
-    private $mode      = [
-        'test'      => 0,
+    private $mode = [
+        'test' => 0,
         'out_equal' => 0,
     ];
 
@@ -60,19 +54,10 @@ class Helper
         }
     }
 
-    /**
-     * @return string
-     * @deprecated
-     */
-    public function getLastError()
-    {
-        return $this->lastError;
-    }
-
     public function getMode($key = false)
     {
         if ($key) {
-            return isset($this->mode[$key]) ? $this->mode[$key] : 0;
+            return $this->mode[$key] ?? 0;
         } else {
             return $this->mode;
         }
@@ -93,7 +78,7 @@ class Helper
         $this->setMode('test', $val);
     }
 
-    public function isEnabled()
+    public function isEnabled(): bool
     {
         return true;
     }
@@ -103,9 +88,8 @@ class Helper
      *
      * @return bool
      */
-    protected function checkModules($names = [])
+    protected function checkModules(array $names = []): bool
     {
-        $names = is_array($names) ? $names : [$names];
         foreach ($names as $name) {
             try {
                 if (!Loader::includeModule($name)) {
@@ -131,11 +115,9 @@ class Helper
         $method = array_shift($args);
         $msg = call_user_func_array('sprintf', $args);
 
-        $msg = $this->getMethod($method) . ': ' . strip_tags($msg);
-
-        $this->lastError = $msg;
-
-        throw new HelperException($msg);
+        throw new HelperException(
+            $this->getMethod($method) . ': ' . strip_tags($msg)
+        );
     }
 
     /**
@@ -155,17 +137,12 @@ class Helper
         }
     }
 
-    protected function getHelperName()
+    protected function getHelperName(): string
     {
-        try {
-            $classInfo = new ReflectionClass($this);
-            return $classInfo->getShortName();
-        } catch (ReflectionException $e) {
-            return 'Helper';
-        }
+        return (new ReflectionClass($this))->getShortName();
     }
 
-    protected function hasDiff($exists, $fields)
+    protected function hasDiff($exists, $fields): bool
     {
         return ($exists != $fields);
     }
@@ -176,19 +153,19 @@ class Helper
      *
      * @return bool
      */
-    protected function hasDiffStrict($exists, $fields)
+    protected function hasDiffStrict($exists, $fields): bool
     {
         return ($exists !== $fields);
     }
 
     /**
-     * @param       $method
-     * @param       $fields
-     * @param array $reqKeys
+     * @param string $method
+     * @param array  $fields
+     * @param array  $reqKeys
      *
      * @throws HelperException
      */
-    protected function checkRequiredKeys($method, $fields, $reqKeys = [])
+    protected function checkRequiredKeys(string $method, array $fields, array $reqKeys = [])
     {
         foreach ($reqKeys as $name) {
             if (empty($fields[$name])) {
@@ -207,12 +184,12 @@ class Helper
 
     /**
      * @param CDBResult $dbres
-     * @param bool      $indexKey
-     * @param bool      $valueKey
+     * @param string    $indexKey
+     * @param string    $valueKey
      *
      * @return array
      */
-    protected function fetchAll(CDBResult $dbres, $indexKey = false, $valueKey = false)
+    protected function fetchAll(CDBResult $dbres, string $indexKey = '', string $valueKey = ''): array
     {
         $res = [];
 
@@ -234,22 +211,9 @@ class Helper
         return $res;
     }
 
-    protected function filterByKey($items, $key, $value)
-    {
-        return array_values(
-            array_filter(
-                $items,
-                function ($item) use ($key, $value) {
-                    return ($item[$key] == $value);
-                }
-            )
-        );
-    }
-
     private function getMethod($method)
     {
         $path = explode('\\', $method);
-        $short = array_pop($path);
-        return $short;
+        return array_pop($path);
     }
 }

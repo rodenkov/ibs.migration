@@ -62,12 +62,12 @@ abstract class AbstractExchange
         }
     }
 
-    protected function isEnabled()
+    protected function isEnabled(): bool
     {
         return true;
     }
 
-    public function setExchangeFile($file)
+    public function setExchangeFile($file): AbstractExchange
     {
         $this->file = $file;
         return $this;
@@ -76,10 +76,9 @@ abstract class AbstractExchange
     /**
      * @param $name
      *
-     * @throws ExchangeException
      * @return $this
      */
-    public function setExchangeResource($name)
+    public function setExchangeResource($name): AbstractExchange
     {
         $this->setExchangeFile(
             $this->exchangeEntity->getResourceFile($name)
@@ -87,12 +86,12 @@ abstract class AbstractExchange
         return $this;
     }
 
-    public function getLimit()
+    public function getLimit(): int
     {
         return $this->limit;
     }
 
-    public function setLimit($limit)
+    public function setLimit(int $limit): AbstractExchange
     {
         $this->limit = $limit;
         return $this;
@@ -138,7 +137,7 @@ abstract class AbstractExchange
 
     /**
      * @param XMLWriter $writer
-     * @param           $fileIds
+     * @param array|int $fileIds
      *
      * @throws Exception
      */
@@ -155,7 +154,7 @@ abstract class AbstractExchange
 
     /**
      * @param XMLWriter $writer
-     * @param           $fileId
+     * @param mixed     $fileId
      *
      * @throws Exception
      */
@@ -172,7 +171,7 @@ abstract class AbstractExchange
                         $writer,
                         $file['SUBDIR'] . '/' . $file['FILE_NAME'],
                         [
-                            'name'        => $file['ORIGINAL_NAME'],
+                            'name' => $file['ORIGINAL_NAME'],
                             'description' => $file['DESCRIPTION'],
                         ]
                     );
@@ -197,7 +196,7 @@ abstract class AbstractExchange
         return false;
     }
 
-    protected function collectField(XMLReader $reader, $tag)
+    protected function collectField(XMLReader $reader, $tag): array
     {
         $field = [];
         if ($this->isOpenTag($reader, $tag)) {
@@ -241,7 +240,7 @@ abstract class AbstractExchange
         return $data;
     }
 
-    protected function isOpenTag(XMLReader $reader, $tag)
+    protected function isOpenTag(XMLReader $reader, $tag): bool
     {
         return (
             $reader->nodeType == XMLReader::ELEMENT
@@ -250,7 +249,7 @@ abstract class AbstractExchange
         );
     }
 
-    protected function isCloseTag(XMLReader $reader, $tag)
+    protected function isCloseTag(XMLReader $reader, $tag): bool
     {
         return (
             $reader->nodeType == XMLReader::END_ELEMENT
@@ -258,7 +257,7 @@ abstract class AbstractExchange
         );
     }
 
-    protected function getExchangeDir()
+    protected function getExchangeDir(): string
     {
         return dirname($this->file);
     }

@@ -22,7 +22,7 @@ class ExchangeManager
      * @throws Exceptions\ExchangeException
      * @return IblockElementsExport
      */
-    public function IblockElementsExport()
+    public function IblockElementsExport(): IblockElementsExport
     {
         return new IblockElementsExport($this->exchangeEntity);
     }
@@ -31,7 +31,7 @@ class ExchangeManager
      * @throws Exceptions\ExchangeException
      * @return IblockElementsImport
      */
-    public function IblockElementsImport()
+    public function IblockElementsImport(): IblockElementsImport
     {
         return new IblockElementsImport($this->exchangeEntity);
     }
@@ -40,7 +40,7 @@ class ExchangeManager
      * @throws Exceptions\ExchangeException
      * @return HlblockElementsImport
      */
-    public function HlblockElementsImport()
+    public function HlblockElementsImport(): HlblockElementsImport
     {
         return new HlblockElementsImport($this->exchangeEntity);
     }
@@ -49,7 +49,7 @@ class ExchangeManager
      * @throws Exceptions\ExchangeException
      * @return HlblockElementsExport
      */
-    public function HlblockElementsExport()
+    public function HlblockElementsExport(): HlblockElementsExport
     {
         return new HlblockElementsExport($this->exchangeEntity);
     }
@@ -58,7 +58,7 @@ class ExchangeManager
      * @throws Exceptions\ExchangeException
      * @return MedialibElementsExport
      */
-    public function MedialibElementsExport()
+    public function MedialibElementsExport(): MedialibElementsExport
     {
         return new MedialibElementsExport($this->exchangeEntity);
     }
@@ -67,7 +67,7 @@ class ExchangeManager
      * @throws Exceptions\ExchangeException
      * @return MedialibElementsImport
      */
-    public function MedialibElementsImport()
+    public function MedialibElementsImport(): MedialibElementsImport
     {
         return new MedialibElementsImport($this->exchangeEntity);
     }

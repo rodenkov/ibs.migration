@@ -19,7 +19,7 @@ class EventSchema extends AbstractSchema
         return ['events/'];
     }
 
-    protected function isBuilderEnabled()
+    protected function isBuilderEnabled():bool
     {
         return $this->getHelperManager()->Event()->isEnabled();
     }

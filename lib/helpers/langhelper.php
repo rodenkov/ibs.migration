@@ -9,7 +9,6 @@ use Sprint\Migration\Locale;
 
 class LangHelper extends Helper
 {
-
     /**
      * @throws HelperException
      * @return mixed
@@ -38,6 +37,7 @@ class LangHelper extends Helper
 
     /**
      * @param array $filter
+     *
      * @return array
      */
     public function getLangs($filter = [])

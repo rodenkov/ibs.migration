@@ -213,8 +213,7 @@ class Out
             $msg = self::makeTaskUrl($msg, $options['tracker_task_url']);
         }
 
-        $msg = Locale::convertToUtf8IfNeed($msg);
-        return $msg;
+        return Locale::convertToUtf8IfNeed($msg);
     }
 
     public static function prepareToHtml($msg, $options = [])
@@ -233,8 +232,7 @@ class Out
 
         $msg = self::makeLinksHtml($msg);
 
-        $msg = Locale::convertToWin1251IfNeed($msg);
-        return $msg;
+        return Locale::convertToWin1251IfNeed($msg);
     }
 
     public static function input($field)
@@ -320,19 +318,19 @@ class Out
         }
     }
 
-    protected static function canOutAsAdminMessage()
+    protected static function canOutAsAdminMessage(): bool
     {
-        return (self::canOutAsHtml() && class_exists('\CAdminMessage')) ? 1 : 0;
+        return (self::canOutAsHtml() && class_exists('\CAdminMessage'));
     }
 
-    protected static function canOutProgressBar()
+    protected static function canOutProgressBar(): bool
     {
-        return method_exists('\CAdminMessage', '_getProgressHtml') ? 1 : 0;
+        return method_exists('\CAdminMessage', '_getProgressHtml');
     }
 
-    protected static function canOutAsHtml()
+    protected static function canOutAsHtml(): bool
     {
-        return (php_sapi_name() == 'cli') ? 0 : 1;
+        return !(php_sapi_name() == 'cli');
     }
 
     protected static function inputText($field)
@@ -359,14 +357,14 @@ class Out
         self::outToConsole($field['title'] . ':', '');
     }
 
-    protected static function getArrayFlat($arr)
+    protected static function getArrayFlat($arr): array
     {
         $out = [];
         self::makeArrayFlatRecursive($out, '', $arr);
         return $out;
     }
 
-    protected static function getArrayDiff($array1, $array2)
+    protected static function getArrayDiff($array1, $array2): array
     {
         return self::makeArrayDiffRecursive($array1, $array2);
     }
@@ -382,7 +380,7 @@ class Out
         }
     }
 
-    protected static function makeArrayDiffRecursive(array $array1, array $array2)
+    protected static function makeArrayDiffRecursive(array $array1, array $array2): array
     {
         $diff = [];
         foreach ($array1 as $key => $value) {
@@ -405,15 +403,15 @@ class Out
     protected static function makeTaskUrl($msg, $taskUrl = '')
     {
         if (false !== strpos($taskUrl, '$1')) {
-            $msg = preg_replace('/\#([a-z0-9_\-]*)/i', $taskUrl, $msg);
+            $msg = preg_replace('/#([a-z0-9_\-]*)/i', $taskUrl, $msg);
         }
 
         return $msg;
     }
 
-    protected static function makeLinksHtml($msg)
+    protected static function makeLinksHtml(string $msg): string
     {
-        $reg_exUrl = "/(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+        $reg_exUrl = "/(http|https):\/\/[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
         if (preg_match($reg_exUrl, $msg, $url)) {
             $msg = preg_replace($reg_exUrl, '<a target="_blank" href="' . $url[0] . '">' . $url[0] . '</a>', $msg);
         }

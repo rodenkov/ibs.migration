@@ -4,7 +4,6 @@ namespace Sprint\Migration;
 
 class Version20150520000005 extends Version
 {
-
     protected $description = "Пример работы с highload-блоками";
 
     /**
@@ -13,25 +12,23 @@ class Version20150520000005 extends Version
      */
     public function up()
     {
-
         $helper = $this->getHelperManager();
 
         $hlblockId = $helper->Hlblock()->saveHlblock([
-            'NAME' => 'Test',
+            'NAME'       => 'Test',
             'TABLE_NAME' => 'hl_test',
         ]);
 
         $helper->Hlblock()->saveField($hlblockId, [
 
             'USER_TYPE_ID' => 'string',
-            'FIELD_NAME' => 'UF_NAME',
+            'FIELD_NAME'   => 'UF_NAME',
         ]);
 
         $helper->Hlblock()->saveField($hlblockId, [
             'USER_TYPE_ID' => 'string',
-            'FIELD_NAME' => 'UF_CODE',
+            'FIELD_NAME'   => 'UF_CODE',
         ]);
-
     }
 
     /**
@@ -41,5 +38,4 @@ class Version20150520000005 extends Version
     {
         //your code ...
     }
-
 }

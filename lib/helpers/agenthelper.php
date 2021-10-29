@@ -257,46 +257,6 @@ class AgentHelper extends Helper
         return false;
     }
 
-    /**
-     * @param $moduleId
-     * @param $name
-     * @param $interval
-     * @param $nextExec
-     *
-     * @throws HelperException
-     * @return bool|mixed
-     * @deprecated
-     */
-    public function replaceAgent($moduleId, $name, $interval, $nextExec)
-    {
-        return $this->saveAgent([
-            'MODULE_ID'      => $moduleId,
-            'NAME'           => $name,
-            'AGENT_INTERVAL' => $interval,
-            'NEXT_EXEC'      => $nextExec,
-        ]);
-    }
-
-    /**
-     * @param $moduleId
-     * @param $name
-     * @param $interval
-     * @param $nextExec
-     *
-     * @throws HelperException
-     * @return bool|mixed
-     * @deprecated
-     */
-    public function addAgentIfNotExists($moduleId, $name, $interval, $nextExec)
-    {
-        return $this->saveAgent([
-            'MODULE_ID'      => $moduleId,
-            'NAME'           => $name,
-            'AGENT_INTERVAL' => $interval,
-            'NEXT_EXEC'      => $nextExec,
-        ]);
-    }
-
     protected function prepareExportAgent($item)
     {
         if (empty($item)) {
