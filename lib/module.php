@@ -74,6 +74,11 @@ class Module
     {
         if (!is_dir($dir)) {
             mkdir($dir, BX_DIR_PERMISSIONS, true);
+            // Исправление rodenkov.p: Чтобы работало на Linux и Windows
+            if (!is_dir($dir) && substr_count($dir, 'migrations.archive')) {
+                $dir = '/../migrations.archive';
+                mkdir($dir, BX_DIR_PERMISSIONS, true);
+            }
         }
 
         if (!is_dir($dir)) {

@@ -585,8 +585,11 @@ class VersionManager
         unset($filter['modified']);
         unset($filter['older']);
 
+        // Исправление rodenkov.p: Чтобы при пустом фильтре можно было выставить миграции на все стенды
+        if(empty($meta['version_filter']))
+            return true;
         foreach ($filter as $k => $v) {
-            if (empty($meta['version_filter'][$k]) || $meta['version_filter'][$k] != $v) {
+            if ($meta['version_filter'][$k] != $v) {
                 return false;
             }
         }
