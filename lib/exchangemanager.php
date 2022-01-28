@@ -1,13 +1,13 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
-use Sprint\Migration\Exchange\HlblockElementsExport;
-use Sprint\Migration\Exchange\HlblockElementsImport;
-use Sprint\Migration\Exchange\IblockElementsExport;
-use Sprint\Migration\Exchange\IblockElementsImport;
-use Sprint\Migration\Exchange\MedialibElementsExport;
-use Sprint\Migration\Exchange\MedialibElementsImport;
+use IBS\Migration\Exchange\HlblockElementsExport;
+use IBS\Migration\Exchange\HlblockElementsImport;
+use IBS\Migration\Exchange\IblockElementsExport;
+use IBS\Migration\Exchange\IblockElementsImport;
+use IBS\Migration\Exchange\MedialibElementsExport;
+use IBS\Migration\Exchange\MedialibElementsImport;
 
 class ExchangeManager
 {

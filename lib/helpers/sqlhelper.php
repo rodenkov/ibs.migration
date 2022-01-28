@@ -1,19 +1,19 @@
 <?php
 
-namespace Sprint\Migration\Helpers;
+namespace IBS\Migration\Helpers;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\DB\Result;
 use Bitrix\Main\Db\SqlQueryException;
 use Exception;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Helper;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Helper;
 use Throwable;
 
 /**
  * Class SqlHelper
  *
- * @package Sprint\Migration\Helpers
+ * @package IBS\Migration\Helpers
  */
 class SqlHelper extends Helper
 {

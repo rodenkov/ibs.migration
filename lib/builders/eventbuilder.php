@@ -1,11 +1,11 @@
 <?php
 
-namespace Sprint\Migration\Builders;
+namespace IBS\Migration\Builders;
 
-use Sprint\Migration\Exceptions\RebuildException;
-use Sprint\Migration\Locale;
-use Sprint\Migration\Module;
-use Sprint\Migration\VersionBuilder;
+use IBS\Migration\Exceptions\RebuildException;
+use IBS\Migration\Locale;
+use IBS\Migration\Module;
+use IBS\Migration\VersionBuilder;
 
 class EventBuilder extends VersionBuilder
 {
@@ -25,7 +25,7 @@ class EventBuilder extends VersionBuilder
 
     /**
      * @throws RebuildException
-     * @throws \Sprint\Migration\Exceptions\MigrationException
+     * @throws \IBS\Migration\Exceptions\MigrationException
      */
     protected function execute()
     {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Sprint\Migration\Builders;
+namespace IBS\Migration\Builders;
 
 use Exception;
-use Sprint\Migration\AbstractBuilder;
-use Sprint\Migration\Enum\VersionEnum;
-use Sprint\Migration\Exceptions\ExchangeException;
-use Sprint\Migration\Locale;
-use Sprint\Migration\VersionManager;
+use IBS\Migration\AbstractBuilder;
+use IBS\Migration\Enum\VersionEnum;
+use IBS\Migration\Exceptions\ExchangeException;
+use IBS\Migration\Locale;
+use IBS\Migration\VersionManager;
 
 class TransferBuilder extends AbstractBuilder
 {

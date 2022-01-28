@@ -1,10 +1,10 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use Exception;
-use Sprint\Migration\Exceptions\RestartException;
-use Sprint\Migration\Traits\HelperManagerTrait;
+use IBS\Migration\Exceptions\RestartException;
+use IBS\Migration\Traits\HelperManagerTrait;
 
 class SchemaManager extends ExchangeEntity
 {
@@ -299,7 +299,7 @@ class SchemaManager extends ExchangeEntity
     protected function getQueueFile($name)
     {
         $name = 'queue__' . strtolower($name);
-        return Module::getDocRoot() . '/bitrix/tmp/sprint.migration/' . $name . '.php';
+        return Module::getDocRoot() . '/bitrix/tmp/ibs.migration/' . $name . '.php';
     }
 
     /**

@@ -1,13 +1,13 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use Bitrix\Main\EventManager;
 use CGroup;
 use CUser;
 use Exception;
-use Sprint\Migration\Enum\VersionEnum;
-use Sprint\Migration\Exceptions\MigrationException;
+use IBS\Migration\Enum\VersionEnum;
+use IBS\Migration\Exceptions\MigrationException;
 use Throwable;
 
 class Console

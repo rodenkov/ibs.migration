@@ -1,35 +1,35 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use DirectoryIterator;
 use Exception;
-use Sprint\Migration\Builders\AgentBuilder;
-use Sprint\Migration\Builders\BlankBuilder;
-use Sprint\Migration\Builders\CacheCleanerBuilder;
-use Sprint\Migration\Builders\EventBuilder;
-use Sprint\Migration\Builders\FormBuilder;
-use Sprint\Migration\Builders\HlblockBuilder;
-use Sprint\Migration\Builders\HlblockElementsBuilder;
-use Sprint\Migration\Builders\IblockBuilder;
-use Sprint\Migration\Builders\IblockCategoryBuilder;
-use Sprint\Migration\Builders\IblockElementsBuilder;
-use Sprint\Migration\Builders\MarkerBuilder;
-use Sprint\Migration\Builders\MedialibElementsBuilder;
-use Sprint\Migration\Builders\OptionBuilder;
-use Sprint\Migration\Builders\TransferBuilder;
-use Sprint\Migration\Builders\UserGroupBuilder;
-use Sprint\Migration\Builders\UserOptionsBuilder;
-use Sprint\Migration\Builders\UserTypeEntitiesBuilder;
-use Sprint\Migration\Enum\VersionEnum;
-use Sprint\Migration\Exceptions\MigrationException;
-use Sprint\Migration\Schema\AgentSchema;
-use Sprint\Migration\Schema\EventSchema;
-use Sprint\Migration\Schema\GroupSchema;
-use Sprint\Migration\Schema\HlblockSchema;
-use Sprint\Migration\Schema\IblockSchema;
-use Sprint\Migration\Schema\OptionSchema;
-use Sprint\Migration\Schema\UserTypeEntitiesSchema;
+use IBS\Migration\Builders\AgentBuilder;
+use IBS\Migration\Builders\BlankBuilder;
+use IBS\Migration\Builders\CacheCleanerBuilder;
+use IBS\Migration\Builders\EventBuilder;
+use IBS\Migration\Builders\FormBuilder;
+use IBS\Migration\Builders\HlblockBuilder;
+use IBS\Migration\Builders\HlblockElementsBuilder;
+use IBS\Migration\Builders\IblockBuilder;
+use IBS\Migration\Builders\IblockCategoryBuilder;
+use IBS\Migration\Builders\IblockElementsBuilder;
+use IBS\Migration\Builders\MarkerBuilder;
+use IBS\Migration\Builders\MedialibElementsBuilder;
+use IBS\Migration\Builders\OptionBuilder;
+use IBS\Migration\Builders\TransferBuilder;
+use IBS\Migration\Builders\UserGroupBuilder;
+use IBS\Migration\Builders\UserOptionsBuilder;
+use IBS\Migration\Builders\UserTypeEntitiesBuilder;
+use IBS\Migration\Enum\VersionEnum;
+use IBS\Migration\Exceptions\MigrationException;
+use IBS\Migration\Schema\AgentSchema;
+use IBS\Migration\Schema\EventSchema;
+use IBS\Migration\Schema\GroupSchema;
+use IBS\Migration\Schema\HlblockSchema;
+use IBS\Migration\Schema\IblockSchema;
+use IBS\Migration\Schema\OptionSchema;
+use IBS\Migration\Schema\UserTypeEntitiesSchema;
 
 class VersionConfig
 {
@@ -107,7 +107,7 @@ class VersionConfig
                 [
                     'title'           => Locale::getMessage('CONFIG_archive'),
                     'migration_dir'   => $this->getSiblingDir('archive', true),
-                    'migration_table' => 'sprint_migration_archive',
+                    'migration_table' => 'ibs_migration_archive',
                 ]
             );
         }
@@ -263,7 +263,7 @@ class VersionConfig
         }
 
         if (empty($values['migration_table'])) {
-            $values['migration_table'] = 'sprint_migration_versions';
+            $values['migration_table'] = 'ibs_migration_versions';
         }
 
         if (empty($values['migration_dir'])) {
@@ -409,7 +409,7 @@ class VersionConfig
         } else {
             $configDefaults = [
                 'migration_dir'   => $this->getSiblingDir($configName, true),
-                'migration_table' => 'sprint_migration_' . $configName,
+                'migration_table' => 'ibs_migration_' . $configName,
             ];
         }
 

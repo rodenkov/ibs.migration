@@ -2,15 +2,15 @@
 
 require_once __DIR__ . "/../lib/locale.php";
 
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "MODULE_NAME"              => "Migrations for developers",
         "MODULE_DESCRIPTION"       => "Module for managing migration, creating, installing, rolling back migration",
-        "PARTNER_NAME"             => "Andrey Ryabin",
-        "PARTNER_URI"              => "https://packagist.org/packages/andreyryabin/sprint.migration",
+        "PARTNER_NAME"             => "Pavel Rodenkov",
+        "PARTNER_URI"              => "https://packagist.org/packages/rodenkov/ibs.migration",
         "ACCESS_DENIED"            => "Access denied",
-        "MENU_SPRINT"              => "Migrations for developers",
+        "MENU_IBS"              => "Migrations for developers",
         "MENU_SCHEMAS"             => "Data schemas",
         "TITLE"                    => "Migrations",
         "FORM_DESCR"               => "Description",
@@ -69,7 +69,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "SELECT_ONE"               => "Select one",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "CONFIG_archive"                     => "Archive",
@@ -91,7 +91,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "CONFIG_version_name_template"       => "Version name template",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "BUILDER_Transfer1"                  => "Transfer migrations",
@@ -110,7 +110,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_UserGroupExport_user_group" => "Select user groups",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "BUILDER_IblockExport1"                        => "Create migration for information block",
@@ -145,7 +145,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_IblockCategoryExport_IblockId"        => "Select information block",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "BUILDER_HlblockElementsExport1"          => "Export highload block elements",
@@ -153,7 +153,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_HlblockElementsExport_HlblockId" => "Select highload block",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "BUILDER_UserOptionsExport_Title"         => "Create migration for user options",
@@ -167,7 +167,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_UserTypeEntities_EntityId"       => "Select entity id",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "BUILDER_FormExport1"              => "Create migration for web form",
@@ -193,13 +193,13 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_SchemaExport"             => "Create data schema",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en", [
         "BUILDER_MedialibElements1"             => "Export media library images",
         "BUILDER_MedialibElements_CollectionId" => "Select collections",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "GOTO_MIGRATION"         => "Admin interface",
@@ -246,7 +246,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "SETTAG_ERROR2"          => "Migration #VERSION# not found",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "SCHEMA_DIFF"                  => "Show difference",
@@ -273,7 +273,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "SCHEMA_USER_TYPE_ENTITY_DESC" => "User type entities: #COUNT#",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "ERR_BUILDER_NOT_FOUND"             => "Builder not found",
@@ -331,7 +331,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "ERR_SAVE_COLLECTION_BY_PATH"       => "Collection by path \"#PATH#\" not created",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "AGENT_CREATED"            => "Agent \"#NAME#\" created",
@@ -384,7 +384,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "IB_TYPE_DELETED"          => "Information block type \"#NAME#\" deleted",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "GD_INSTALL"          => "Install gadgets: \"Migration summary\"",
@@ -407,7 +407,7 @@ require_once __DIR__ . "/../lib/locale.php";
     ]
 );
 
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "en",
     [
         "BUILDER_GROUP_Main"     => "Main module",

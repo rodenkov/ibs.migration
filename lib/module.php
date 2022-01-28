@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use COption;
 use Exception;
@@ -11,24 +11,24 @@ class Module
 
     public static function getDbOption($name, $default = '')
     {
-        return COption::GetOptionString('sprint.migration', $name, $default);
+        return COption::GetOptionString('ibs.migration', $name, $default);
     }
 
     public static function setDbOption($name, $value)
     {
-        if ($value != COption::GetOptionString('sprint.migration', $name)) {
-            COption::SetOptionString('sprint.migration', $name, $value);
+        if ($value != COption::GetOptionString('ibs.migration', $name)) {
+            COption::SetOptionString('ibs.migration', $name, $value);
         }
     }
 
     public static function removeDbOption($name)
     {
-        COption::RemoveOption('sprint.migration', $name);
+        COption::RemoveOption('ibs.migration', $name);
     }
 
     public static function removeDbOptions()
     {
-        COption::RemoveOption('sprint.migration');
+        COption::RemoveOption('ibs.migration');
     }
 
     public static function getDocRoot(): string
@@ -47,10 +47,10 @@ class Module
 
     public static function getModuleDir(): string
     {
-        if (is_file(self::getDocRoot() . '/local/modules/sprint.migration/include.php')) {
-            return self::getDocRoot() . '/local/modules/sprint.migration';
+        if (is_file(self::getDocRoot() . '/local/modules/ibs.migration/include.php')) {
+            return self::getDocRoot() . '/local/modules/ibs.migration';
         } else {
-            return self::getDocRoot() . '/bitrix/modules/sprint.migration';
+            return self::getDocRoot() . '/bitrix/modules/ibs.migration';
         }
     }
 
@@ -139,8 +139,8 @@ class Module
         }
 
         if (
-            is_file($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/sprint.migration/include.php') &&
-            is_file($_SERVER['DOCUMENT_ROOT'] . '/local/modules/sprint.migration/include.php')
+            is_file($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/ibs.migration/include.php') &&
+            is_file($_SERVER['DOCUMENT_ROOT'] . '/local/modules/ibs.migration/include.php')
         ) {
             Throw new Exception('module installed to bitrix and local folder');
         }

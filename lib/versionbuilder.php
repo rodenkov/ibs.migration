@@ -1,8 +1,8 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
-use Sprint\Migration\Enum\VersionEnum;
+use IBS\Migration\Enum\VersionEnum;
 
 abstract class VersionBuilder extends AbstractBuilder
 {

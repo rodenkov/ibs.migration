@@ -1,12 +1,12 @@
 <?php
 
-namespace Sprint\Migration\SymfonyBundle;
+namespace IBS\Migration\SymfonyBundle;
 
-use Sprint\Migration\SymfonyBundle\Command\ConsoleCommand;
+use IBS\Migration\SymfonyBundle\Command\ConsoleCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SprintMigrationBundle extends Bundle
+class IBSMigrationBundle extends Bundle
 {
     public function registerCommands(Application $application)
     {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Sprint\Migration\Exchange;
+namespace IBS\Migration\Exchange;
 
 use Exception;
-use Sprint\Migration\AbstractExchange;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Exceptions\RestartException;
+use IBS\Migration\AbstractExchange;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Exceptions\RestartException;
 use XMLWriter;
 
 class HlblockElementsExport extends AbstractExchange

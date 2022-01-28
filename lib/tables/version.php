@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration\Tables;
+namespace IBS\Migration\Tables;
 
 use Bitrix\Main\DB\SqlQueryException;
 

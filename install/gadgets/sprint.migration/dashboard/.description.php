@@ -1,13 +1,13 @@
 <?
 
 use Bitrix\Main\Loader;
-use Sprint\Migration\Locale;
+use IBS\Migration\Locale;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {
     die();
 }
 
-if (!Loader::includeModule('sprint.migration')) {
+if (!Loader::includeModule('ibs.migration')) {
     return false;
 }
 

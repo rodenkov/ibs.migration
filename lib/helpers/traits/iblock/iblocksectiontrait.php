@@ -1,10 +1,10 @@
 <?php
 
-namespace Sprint\Migration\Helpers\Traits\Iblock;
+namespace IBS\Migration\Helpers\Traits\Iblock;
 
 use CIBlockSection;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Locale;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Locale;
 
 trait IblockSectionTrait
 {

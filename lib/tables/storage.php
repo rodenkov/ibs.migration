@@ -1,13 +1,13 @@
 <?php
 
-namespace Sprint\Migration\Tables;
+namespace IBS\Migration\Tables;
 
 class StorageTable extends AbstractTable
 {
 
     public function __construct($name = 'default')
     {
-        parent::__construct('sprint_storage_' . $name);
+        parent::__construct('ibs_storage_' . $name);
     }
 
     protected function createTable()

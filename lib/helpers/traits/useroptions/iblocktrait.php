@@ -1,12 +1,12 @@
 <?php
 
-namespace Sprint\Migration\Helpers\Traits\UserOptions;
+namespace IBS\Migration\Helpers\Traits\UserOptions;
 
 use CIBlock;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\HelperManager;
-use Sprint\Migration\Locale;
-use Sprint\Migration\Traits\HelperManagerTrait;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\HelperManager;
+use IBS\Migration\Locale;
+use IBS\Migration\Traits\HelperManagerTrait;
 
 trait IblockTrait
 {

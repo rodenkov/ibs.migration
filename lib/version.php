@@ -1,14 +1,14 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Exceptions\RestartException;
-use Sprint\Migration\Traits\HelperManagerTrait;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Exceptions\RestartException;
+use IBS\Migration\Traits\HelperManagerTrait;
 
 /**
  * Class Version
- * @package Sprint\Migration
+ * @package IBS\Migration
  */
 class Version extends ExchangeEntity
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Sprint\Migration\Schema;
+namespace IBS\Migration\Schema;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ArgumentOutOfRangeException;
 use Bitrix\Main\ObjectPropertyException;
 use Bitrix\Main\SystemException;
 use Exception;
-use Sprint\Migration\AbstractSchema;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Locale;
+use IBS\Migration\AbstractSchema;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Locale;
 
 class OptionSchema extends AbstractSchema
 {

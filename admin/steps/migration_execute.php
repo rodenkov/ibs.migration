@@ -1,8 +1,8 @@
 <?php
 
-use Sprint\Migration\Enum\VersionEnum;
-use Sprint\Migration\VersionConfig;
-use Sprint\Migration\VersionManager;
+use IBS\Migration\Enum\VersionEnum;
+use IBS\Migration\VersionConfig;
+use IBS\Migration\VersionManager;
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
@@ -24,7 +24,7 @@ if ($_POST["step_code"] == "migration_execute" && check_bitrix_sessid('send_sess
 
 
     $search = !empty($_POST['search']) ? trim($_POST['search']) : '';
-    $search = Sprint\Migration\Locale::convertToUtf8IfNeed($search);
+    $search = IBS\Migration\Locale::convertToUtf8IfNeed($search);
 
     $filter = !empty($_POST['filter']) ? trim($_POST['filter']) : '';
 
@@ -70,18 +70,18 @@ if ($_POST["step_code"] == "migration_execute" && check_bitrix_sessid('send_sess
     if ($version && $action) {
 
         if (!$restart) {
-            Sprint\Migration\Out::out('[%s]%s (%s) start[/]', $action, $version, $action);
+            IBS\Migration\Out::out('[%s]%s (%s) start[/]', $action, $version, $action);
         }
 
         $success = $versionManager->startMigration($version, $action, $params, false, $settag);
         $restart = $versionManager->needRestart($version);
 
         if ($success && !$restart) {
-            Sprint\Migration\Out::out('%s (%s) success', $version, $action);
+            IBS\Migration\Out::out('%s (%s) success', $version, $action);
         }
 
         if (!$success && !$restart) {
-            Sprint\Migration\Out::outError(
+            IBS\Migration\Out::outError(
                 '%s (%s) error: %s',
                 $version,
                 $action,

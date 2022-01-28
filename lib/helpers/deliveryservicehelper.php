@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration\Helpers;
+namespace IBS\Migration\Helpers;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ArgumentNullException;
@@ -11,8 +11,8 @@ use Bitrix\Sale\Delivery\Services\Manager;
 use Bitrix\Sale\Delivery\Services\Table;
 use Exception;
 use InvalidArgumentException;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Helper;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Helper;
 
 class DeliveryServiceHelper extends Helper
 {

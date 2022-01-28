@@ -1,7 +1,7 @@
 <?php
 
-use Sprint\Migration\VersionConfig;
-use Sprint\Migration\VersionManager;
+use IBS\Migration\VersionConfig;
+use IBS\Migration\VersionManager;
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
@@ -20,7 +20,7 @@ if ($existsEvents && check_bitrix_sessid('send_sessid')) {
     $settag = !empty($_POST['settag']) ? $_POST['settag'] : '';
 
     $settagresult = $versionManager->setMigrationTag($version, $settag);
-    Sprint\Migration\Out::outMessages($settagresult);
+    IBS\Migration\Out::outMessages($settagresult);
     ?>
     <script>
         migrationMigrationRefresh(function () {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use DirectoryIterator;
 use Exception;
 use SplFileInfo;
-use Sprint\Migration\Traits\HelperManagerTrait;
+use IBS\Migration\Traits\HelperManagerTrait;
 
 abstract class AbstractSchema extends ExchangeEntity
 {

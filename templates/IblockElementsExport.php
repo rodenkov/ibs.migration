@@ -13,7 +13,7 @@
 
 ?><?php echo "<?php\n" ?>
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 <?php echo $extendUse ?>
 

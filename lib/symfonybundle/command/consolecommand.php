@@ -1,9 +1,9 @@
 <?php
 
-namespace Sprint\Migration\SymfonyBundle\Command;
+namespace IBS\Migration\SymfonyBundle\Command;
 
-use Sprint\Migration\Console;
-use Sprint\Migration\Module;
+use IBS\Migration\Console;
+use IBS\Migration\Module;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,7 +14,7 @@ class ConsoleCommand extends Command
 {
     protected function configure()
     {
-        $this->setName('sprint:migration')
+        $this->setName('ibs:migration')
              ->setDescription('Migration console');
 
         foreach ($this->getArguments() as $name) {

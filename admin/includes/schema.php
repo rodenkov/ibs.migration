@@ -1,6 +1,6 @@
 <?
 
-use Sprint\Migration\Locale;
+use IBS\Migration\Locale;
 
 ?>
 <div id="schema-container" data-sessid="<?= bitrix_sessid() ?>">

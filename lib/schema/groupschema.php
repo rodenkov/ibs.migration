@@ -1,11 +1,11 @@
 <?php
 
-namespace Sprint\Migration\Schema;
+namespace IBS\Migration\Schema;
 
 use Exception;
-use Sprint\Migration\AbstractSchema;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Locale;
+use IBS\Migration\AbstractSchema;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Locale;
 
 class GroupSchema extends AbstractSchema
 {

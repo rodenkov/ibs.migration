@@ -25,20 +25,20 @@ try {
 
     require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 
-    if (!Loader::includeModule('sprint.migration')) {
-        /** @var sprint_migration $ob */
-        if ($ob = CModule::CreateModuleObject('sprint.migration')) {
+    if (!Loader::includeModule('ibs.migration')) {
+        /** @var ibs_migration $ob */
+        if ($ob = CModule::CreateModuleObject('ibs.migration')) {
             $ob->DoInstall();
         }
     }
 
-    if (!Loader::includeModule('sprint.migration')) {
-        Throw new Exception('need to install module sprint.migration');
+    if (!Loader::includeModule('ibs.migration')) {
+        Throw new Exception('need to install module ibs.migration');
     }
 
-    Sprint\Migration\Module::checkHealth();
+    IBS\Migration\Module::checkHealth();
 
-    $console = new Sprint\Migration\Console($argv);
+    $console = new IBS\Migration\Console($argv);
     $console->executeConsoleCommand();
 
     require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/epilog_after.php");

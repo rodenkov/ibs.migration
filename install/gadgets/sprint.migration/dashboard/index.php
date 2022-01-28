@@ -4,11 +4,11 @@
  */
 
 use Bitrix\Main\Loader;
-use Sprint\Migration\Locale;
-use Sprint\Migration\Module;
-use Sprint\Migration\SchemaManager;
-use Sprint\Migration\VersionConfig;
-use Sprint\Migration\VersionManager;
+use IBS\Migration\Locale;
+use IBS\Migration\Module;
+use IBS\Migration\SchemaManager;
+use IBS\Migration\VersionConfig;
+use IBS\Migration\VersionManager;
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
@@ -16,11 +16,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
 
 try {
 
-    if (!Loader::includeModule('sprint.migration')) {
-        Throw new Exception('need to install module sprint.migration');
+    if (!Loader::includeModule('ibs.migration')) {
+        Throw new Exception('need to install module ibs.migration');
     }
 
-    if ($APPLICATION->GetGroupRight('sprint.migration') == 'D') {
+    if ($APPLICATION->GetGroupRight('ibs.migration') == 'D') {
         Throw new Exception(Locale::getMessage("ACCESS_DENIED"));
     }
 
@@ -55,7 +55,7 @@ try {
                 [
                     'text' => Locale::getMessage('GD_SHOW'),
                     'title' => Locale::getMessage('GD_SHOW_MIGRATIONS'),
-                    'url' => '/bitrix/admin/sprint_migrations.php?' . http_build_query([
+                    'url' => '/bitrix/admin/ibs_migrations.php?' . http_build_query([
                             'config' => $config['name'],
                             'lang' => LANGUAGE_ID,
                         ]),
@@ -89,7 +89,7 @@ try {
                     [
                         'text' => Locale::getMessage('GD_SHOW'),
                         'title' => Locale::getMessage('GD_SHOW_SCHEMAS'),
-                        'url' => '/bitrix/admin/sprint_migrations.php?' . http_build_query([
+                        'url' => '/bitrix/admin/ibs_migrations.php?' . http_build_query([
                                 'schema' => $config['name'],
                                 'lang' => LANGUAGE_ID,
                             ]),

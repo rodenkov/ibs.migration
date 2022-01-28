@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration\Enum;
+namespace IBS\Migration\Enum;
 
 class VersionEnum
 {

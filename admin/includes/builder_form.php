@@ -1,9 +1,9 @@
 <?php
 /** @var $builder AbstractBuilder */
 
-use Sprint\Migration\AbstractBuilder;
-use Sprint\Migration\Locale;
-use Sprint\Migration\Out;
+use IBS\Migration\AbstractBuilder;
+use IBS\Migration\Locale;
+use IBS\Migration\Out;
 
 ?>
 <form method="post">

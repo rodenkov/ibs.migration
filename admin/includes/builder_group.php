@@ -1,8 +1,8 @@
 <?php
 
-use Sprint\Migration\Locale;
-use Sprint\Migration\VersionConfig;
-use Sprint\Migration\VersionManager;
+use IBS\Migration\Locale;
+use IBS\Migration\VersionConfig;
+use IBS\Migration\VersionManager;
 
 /** @var $versionConfig VersionConfig */
 $versionManager = new VersionManager($versionConfig);

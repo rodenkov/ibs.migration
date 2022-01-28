@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration\Helpers;
+namespace IBS\Migration\Helpers;
 
 use Bitrix\Main\Db\SqlQueryException;
 use CFile;
@@ -8,14 +8,14 @@ use CMedialib;
 use CMedialibCollection;
 use CMedialibItem;
 use CTask;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Helper;
-use Sprint\Migration\Locale;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Helper;
+use IBS\Migration\Locale;
 
 /**
  * Class MedialibHelper
  *
- * @package Sprint\Migration\Helpers
+ * @package IBS\Migration\Helpers
  */
 class MedialibHelper extends Helper
 {

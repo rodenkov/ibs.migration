@@ -1,15 +1,15 @@
 <?php
 
-namespace Sprint\Migration\Helpers;
+namespace IBS\Migration\Helpers;
 
 use CGridOptions;
 use CUserOptions;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Helper;
-use Sprint\Migration\Helpers\Traits\UserOptions\IblockTrait;
-use Sprint\Migration\Helpers\Traits\UserOptions\UserGroupTrait;
-use Sprint\Migration\Helpers\Traits\UserOptions\UserTrait;
-use Sprint\Migration\Locale;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Helper;
+use IBS\Migration\Helpers\Traits\UserOptions\IblockTrait;
+use IBS\Migration\Helpers\Traits\UserOptions\UserGroupTrait;
+use IBS\Migration\Helpers\Traits\UserOptions\UserTrait;
+use IBS\Migration\Locale;
 
 /*
 Example $formData for buildForm

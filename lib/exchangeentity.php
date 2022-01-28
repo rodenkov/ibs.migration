@@ -1,11 +1,11 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use ReflectionClass;
 use ReflectionException;
-use Sprint\Migration\Exceptions\ExchangeException;
-use Sprint\Migration\Exceptions\RestartException;
+use IBS\Migration\Exceptions\ExchangeException;
+use IBS\Migration\Exceptions\RestartException;
 
 
 abstract class ExchangeEntity

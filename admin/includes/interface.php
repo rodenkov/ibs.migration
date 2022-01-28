@@ -1,7 +1,7 @@
 <?php
 
-use Sprint\Migration\Locale;
-use Sprint\Migration\Out;
+use IBS\Migration\Locale;
+use IBS\Migration\Out;
 global $APPLICATION;
 $APPLICATION->SetTitle(Locale::getMessage('TITLE'));
 
@@ -10,11 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 if (isset($_REQUEST['schema'])) {
-    $versionConfig = new Sprint\Migration\VersionConfig($_REQUEST['schema']);
+    $versionConfig = new IBS\Migration\VersionConfig($_REQUEST['schema']);
 } elseif (isset($_REQUEST['config'])) {
-    $versionConfig = new Sprint\Migration\VersionConfig($_REQUEST['config']);
+    $versionConfig = new IBS\Migration\VersionConfig($_REQUEST['config']);
 } else {
-    $versionConfig = new Sprint\Migration\VersionConfig();
+    $versionConfig = new IBS\Migration\VersionConfig();
 }
 
 if ($versionConfig->getVal('show_admin_interface')) {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use CFile;
 use Exception;
-use Sprint\Migration\Exceptions\ExchangeException;
-use Sprint\Migration\Exceptions\RestartException;
-use Sprint\Migration\Traits\HelperManagerTrait;
+use IBS\Migration\Exceptions\ExchangeException;
+use IBS\Migration\Exceptions\RestartException;
+use IBS\Migration\Traits\HelperManagerTrait;
 use XMLReader;
 use XMLWriter;
 

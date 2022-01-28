@@ -1,14 +1,14 @@
 <?php
 
-namespace Sprint\Migration\Builders;
+namespace IBS\Migration\Builders;
 
 use Bitrix\Main\Db\SqlQueryException;
-use Sprint\Migration\Exceptions\ExchangeException;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Exceptions\RebuildException;
-use Sprint\Migration\Locale;
-use Sprint\Migration\Module;
-use Sprint\Migration\VersionBuilder;
+use IBS\Migration\Exceptions\ExchangeException;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Exceptions\RebuildException;
+use IBS\Migration\Locale;
+use IBS\Migration\Module;
+use IBS\Migration\VersionBuilder;
 
 class FormBuilder extends VersionBuilder
 {

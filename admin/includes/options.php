@@ -1,9 +1,9 @@
 <?php
 
-use Sprint\Migration\Locale;
-use Sprint\Migration\Module;
-use Sprint\Migration\Out;
-use Sprint\Migration\VersionConfig;
+use IBS\Migration\Locale;
+use IBS\Migration\Module;
+use IBS\Migration\Out;
+use IBS\Migration\VersionConfig;
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && check_bitrix_sessid()) {
 
@@ -41,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && check_bitrix_sessid()) {
     }
 
     if (!empty($_REQUEST["gadgets_install"])) {
-        /** @var $tmpmodule sprint_migration */
-        $tmpmodule = CModule::CreateModuleObject('sprint.migration');
+        /** @var $tmpmodule ibs_migration */
+        $tmpmodule = CModule::CreateModuleObject('ibs.migration');
         $tmpmodule->installGadgets();
         Out::outSuccess(
             Locale::getMessage('GD_INSTALL_success')

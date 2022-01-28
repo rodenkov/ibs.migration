@@ -1,8 +1,8 @@
 <?php
 
-namespace Sprint\Migration\Helpers;
+namespace IBS\Migration\Helpers;
 
-use Sprint\Migration\Exceptions\HelperException;
+use IBS\Migration\Exceptions\HelperException;
 
 class HlblockExchangeHelper extends HlblockHelper
 {
