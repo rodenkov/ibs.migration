@@ -1,8 +1,8 @@
 <?php
 
-use Sprint\Migration\Enum\VersionEnum;
-use Sprint\Migration\Locale;
-use Sprint\Migration\Module;
+use IBS\Migration\Enum\VersionEnum;
+use IBS\Migration\Locale;
+use IBS\Migration\Module;
 
 global $APPLICATION;
 $isSettinsPage = strpos($APPLICATION->GetCurPage(), 'settings.php');
@@ -15,26 +15,25 @@ $isSettinsPage = strpos($APPLICATION->GetCurPage(), 'settings.php');
             </div>
             <div style="margin-bottom: 10px;">
                 <?php if ($isSettinsPage): ?>
-                    <a href="/bitrix/admin/sprint_migrations.php?config=<?= VersionEnum::CONFIG_DEFAULT ?>&lang=<?= LANGUAGE_ID ?>"><?= Locale::getMessage('GOTO_MIGRATION') ?></a>
+                    <a href="/bitrix/admin/ibs_migrations.php?config=<?= VersionEnum::CONFIG_DEFAULT ?>&lang=<?= LANGUAGE_ID ?>"><?= Locale::getMessage('GOTO_MIGRATION') ?></a>
                 <?php else: ?>
-                    <a href="/bitrix/admin/settings.php?mid=sprint.migration&mid_menu=1&lang=<?= LANGUAGE_ID ?>"><?= Locale::getMessage('GOTO_OPTIONS') ?></a>
+                    <a href="/bitrix/admin/settings.php?mid=ibs.migration&mid_menu=1&lang=<?= LANGUAGE_ID ?>"><?= Locale::getMessage('GOTO_OPTIONS') ?></a>
                 <?php endif; ?>
             </div>
         </div>
         <div class="sp-block">
             <div style="margin-bottom: 10px;">
                 <?= Locale::getMessage('LINK_MP') ?> <br/>
-                <a href="http://marketplace.1c-bitrix.ru/solutions/sprint.migration/" target="_blank">http://marketplace.1c-bitrix.ru/solutions/sprint.migration/</a>
             </div>
             <div style="margin-bottom: 10px;">
                 <?= Locale::getMessage('LINK_COMPOSER') ?>
                 <br/>
-                <a href="https://packagist.org/packages/andreyryabin/sprint.migration" target="_blank">https://packagist.org/packages/andreyryabin/sprint.migration</a>
+                <a href="https://packagist.org/packages/rodenkov/ibs.migration" target="_blank">https://packagist.org/packages/rodenkov/ibs.migration</a>
             </div>
             <div style="margin-bottom: 10px;">
                 <?= Locale::getMessage('LINK_DOC') ?>
                 <br/>
-                <a href="https://github.com/andreyryabin/sprint.migration/wiki" target="_blank">https://github.com/andreyryabin/sprint.migration/wiki</a>
+                <a href="https://github.com/rodenkov/ibs.migration/wiki" target="_blank">https://github.com/rodenkov/ibs.migration/wiki</a>
             </div>
             <div style="margin-bottom: 10px;">
                 <?= Locale::getMessage('LINK_ARTICLES') ?>
@@ -44,7 +43,7 @@ $isSettinsPage = strpos($APPLICATION->GetCurPage(), 'settings.php');
             <div style="margin-bottom: 10px;">
                 <?= Locale::getMessage('LINK_TELEGRAM') ?>
                 <br/>
-                <a href="https://t.me/sprint_migration_bitrix">https://t.me/sprint_migration_bitrix</a>
+                <a href="https://t.me/ibs_migration_bitrix">https://t.me/ibs_migration_bitrix</a>
             </div>
         </div>
     </div>

@@ -1,12 +1,12 @@
 <?php
 
-namespace Sprint\Migration\Tables;
+namespace IBS\Migration\Tables;
 
 use Bitrix\Main\Application;
 use Bitrix\Main\DB\Result;
 use Bitrix\Main\DB\SqlQueryException;
-use Sprint\Migration\Locale;
-use Sprint\Migration\Module;
+use IBS\Migration\Locale;
+use IBS\Migration\Module;
 
 abstract class AbstractTable
 {

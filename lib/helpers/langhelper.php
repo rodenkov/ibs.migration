@@ -1,11 +1,11 @@
 <?php
 
-namespace Sprint\Migration\Helpers;
+namespace IBS\Migration\Helpers;
 
 use CLanguage;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Helper;
-use Sprint\Migration\Locale;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Helper;
+use IBS\Migration\Locale;
 
 class LangHelper extends Helper
 {

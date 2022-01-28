@@ -1,11 +1,11 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use Exception;
-use Sprint\Migration\Exceptions\RebuildException;
-use Sprint\Migration\Exceptions\RestartException;
-use Sprint\Migration\Traits\HelperManagerTrait;
+use IBS\Migration\Exceptions\RebuildException;
+use IBS\Migration\Exceptions\RestartException;
+use IBS\Migration\Traits\HelperManagerTrait;
 
 abstract class AbstractBuilder extends ExchangeEntity
 {

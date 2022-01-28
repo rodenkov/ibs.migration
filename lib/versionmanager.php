@@ -1,16 +1,16 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use CMain;
 use DirectoryIterator;
 use Exception;
 use ReflectionClass;
 use SplFileInfo;
-use Sprint\Migration\Enum\VersionEnum;
-use Sprint\Migration\Exceptions\MigrationException;
-use Sprint\Migration\Exceptions\RestartException;
-use Sprint\Migration\Tables\VersionTable;
+use IBS\Migration\Enum\VersionEnum;
+use IBS\Migration\Exceptions\MigrationException;
+use IBS\Migration\Exceptions\RestartException;
+use IBS\Migration\Tables\VersionTable;
 use Throwable;
 
 class VersionManager
@@ -706,7 +706,7 @@ class VersionManager
             /** @noinspection PhpIncludeInspection */
             require_once($file['location']);
 
-            $class = 'Sprint\Migration\\' . $versionName;
+            $class = 'IBS\Migration\\' . $versionName;
             if (!class_exists($class)) {
                 return $meta;
             }

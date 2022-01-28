@@ -1,10 +1,10 @@
 <?php
 
-namespace Sprint\Migration\Schema;
+namespace IBS\Migration\Schema;
 
-use Sprint\Migration\AbstractSchema;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Locale;
+use IBS\Migration\AbstractSchema;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Locale;
 
 class UserTypeEntitiesSchema extends AbstractSchema
 {

@@ -1,8 +1,8 @@
 <?php
 
-use Sprint\Migration\Locale;
-use Sprint\Migration\SchemaManager;
-use Sprint\Migration\VersionConfig;
+use IBS\Migration\Locale;
+use IBS\Migration\SchemaManager;
+use IBS\Migration\VersionConfig;
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();

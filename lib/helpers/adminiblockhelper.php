@@ -1,10 +1,10 @@
 <?php
 
-namespace Sprint\Migration\Helpers;
+namespace IBS\Migration\Helpers;
 
 /**
  * Class AdminIblockHelper
- * @package Sprint\Migration\Helpers
+ * @package IBS\Migration\Helpers
  *
  * @deprecated use UserOptionsHelper
  */

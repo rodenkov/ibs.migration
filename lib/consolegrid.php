@@ -56,12 +56,12 @@
  * Убрал возможность цветого оформления
  * Помолился богам опенсорса
  *
- * @category Sprint\Migration
+ * @category IBS\Migration
  * @package  ConsoleGrid
- * @author   Andrey Ryabin <andreyryabin@yandex.ru>
+ * @author   Pavel Rodenkov <rodenkov.p@yandex.ru>
  */
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 class ConsoleGrid
 {

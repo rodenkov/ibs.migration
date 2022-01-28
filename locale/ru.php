@@ -2,15 +2,15 @@
 
 require_once __DIR__ . "/../lib/locale.php";
 
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "MODULE_NAME"              => "Миграции для разработчиков",
         "MODULE_DESCRIPTION"       => "Модуль для управления миграциями бд, создание, установка, откат миграций",
-        "PARTNER_NAME"             => "Андрей Рябин",
-        "PARTNER_URI"              => "https://packagist.org/packages/andreyryabin/sprint.migration",
+        "PARTNER_NAME"             => "Павел Роденков",
+        "PARTNER_URI"              => "https://packagist.org/packages/rodenkov/ibs.migration",
         "ACCESS_DENIED"            => "Доступ запрещен",
-        "MENU_SPRINT"              => "Миграции для разработчиков",
+        "MENU_IBS"              => "Миграции для разработчиков",
         "MENU_SCHEMAS"             => "Схемы данных",
         "TITLE"                    => "Миграции",
         "FORM_DESCR"               => "Описание",
@@ -69,7 +69,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "SELECT_ONE"               => "Выбрать",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "CONFIG_archive"                     => "Архив",
@@ -91,7 +91,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "CONFIG_version_name_template"       => "Шаблон названия миграции",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "BUILDER_Transfer1"                  => "Перенести миграции",
@@ -110,7 +110,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_UserGroupExport_user_group" => "Выберите группы",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "BUILDER_IblockExport1"                        => "Создать миграцию для инфоблока",
@@ -145,7 +145,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_IblockCategoryExport_IblockId"        => "Выберите инфоблок",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "BUILDER_HlblockElementsExport1"          => "Перенести элементы highload-блоков",
@@ -153,7 +153,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_HlblockElementsExport_HlblockId" => "Выберите highload-блок",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "BUILDER_UserOptionsExport_Title"         => "Создать миграцию для пользовательских настроек",
@@ -167,7 +167,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_UserTypeEntities_EntityId"       => "Укажите поле для выгрузки",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "BUILDER_FormExport1"              => "Создать миграцию для веб-формы",
@@ -193,14 +193,14 @@ require_once __DIR__ . "/../lib/locale.php";
         "BUILDER_SchemaExport"             => "Создание схемы",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru", [
         "BUILDER_MedialibElements1"             => "Перенести изображения медиабиблиотеки",
         "BUILDER_MedialibElements2"             => "Переносит изображения по коллекциям\nСоздает коллекции если их не было\nОбновляет изображения и коллекции с таким же названием",
         "BUILDER_MedialibElements_CollectionId" => "Выбрать коллекции",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "GOTO_MIGRATION"         => "Админка миграций",
@@ -247,7 +247,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "SETTAG_ERROR2"          => "Миграция #VERSION# не найдена",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "SCHEMA_DIFF"                  => "Проверить изменения",
@@ -274,7 +274,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "SCHEMA_USER_TYPE_ENTITY_DESC" => "Полей: #COUNT#",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "ERR_BUILDER_NOT_FOUND"             => "Конструктор не найден",
@@ -332,7 +332,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "ERR_SAVE_COLLECTION_BY_PATH"       => "Не удалось сохранить коллекцию по пути \"#PATH#\"",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "AGENT_CREATED"            => "Агент \"#NAME#\" добавлен",
@@ -385,7 +385,7 @@ require_once __DIR__ . "/../lib/locale.php";
         "IB_TYPE_DELETED"          => "Тип инфоблока \"#NAME#\" удален",
     ]
 );
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "GD_INSTALL"          => "Установить гаджеты: \"Сводка по миграциям\"",
@@ -408,7 +408,7 @@ require_once __DIR__ . "/../lib/locale.php";
     ]
 );
 
-\Sprint\Migration\Locale::loadLocale(
+\IBS\Migration\Locale::loadLocale(
     "ru",
     [
         "BUILDER_GROUP_Main"     => "Главный модуль",

@@ -1,11 +1,11 @@
 <?php
 
-namespace Sprint\Migration\Builders;
+namespace IBS\Migration\Builders;
 
-use Sprint\Migration\AbstractBuilder;
-use Sprint\Migration\Enum\VersionEnum;
-use Sprint\Migration\Locale;
-use Sprint\Migration\VersionManager;
+use IBS\Migration\AbstractBuilder;
+use IBS\Migration\Enum\VersionEnum;
+use IBS\Migration\Locale;
+use IBS\Migration\VersionManager;
 
 class MarkerBuilder extends AbstractBuilder
 {

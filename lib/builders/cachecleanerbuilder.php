@@ -1,9 +1,9 @@
 <?php
 
-namespace Sprint\Migration\Builders;
+namespace IBS\Migration\Builders;
 
-use Sprint\Migration\AbstractBuilder;
-use Sprint\Migration\Locale;
+use IBS\Migration\AbstractBuilder;
+use IBS\Migration\Locale;
 use function BXClearCache;
 
 

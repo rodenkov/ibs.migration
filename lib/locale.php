@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 class Locale
 {
@@ -42,7 +42,7 @@ class Locale
     {
         $lang = ($lang) ? $lang : self::getLang();
 
-        return strtoupper('SPRINT_MIGRATION_' . $lang . '_' . $shortName);
+        return strtoupper('IBS_MIGRATION_' . $lang . '_' . $shortName);
     }
 
     public static function getLang()

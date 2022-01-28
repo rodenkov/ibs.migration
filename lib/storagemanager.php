@@ -1,8 +1,8 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
-use Sprint\Migration\Tables\StorageTable;
+use IBS\Migration\Tables\StorageTable;
 
 class StorageManager extends StorageTable
 {

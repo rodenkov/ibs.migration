@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration\Exceptions;
+namespace IBS\Migration\Exceptions;
 
 use Exception;
 

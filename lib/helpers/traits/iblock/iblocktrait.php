@@ -1,12 +1,12 @@
 <?php
 
-namespace Sprint\Migration\Helpers\Traits\Iblock;
+namespace IBS\Migration\Helpers\Traits\Iblock;
 
 use Bitrix\Iblock\InheritedProperty\IblockTemplates;
 use CIBlock;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Helpers\UserGroupHelper;
-use Sprint\Migration\Locale;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Helpers\UserGroupHelper;
+use IBS\Migration\Locale;
 
 trait IblockTrait
 {

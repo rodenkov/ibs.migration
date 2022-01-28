@@ -1,14 +1,14 @@
 <?php
 
-namespace Sprint\Migration\Helpers\Traits\Iblock;
+namespace IBS\Migration\Helpers\Traits\Iblock;
 
 use Bitrix\Iblock\Model\PropertyFeature;
 use Bitrix\Iblock\PropertyFeatureTable;
 use CIBlockProperty;
 use CIBlockPropertyEnum;
 use Exception;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Locale;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Locale;
 
 trait IblockPropertyTrait
 {

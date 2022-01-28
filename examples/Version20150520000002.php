@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use CIBlockElement;
 

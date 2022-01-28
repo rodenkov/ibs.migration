@@ -1,7 +1,7 @@
 <?php
 
-use Sprint\Migration\VersionConfig;
-use Sprint\Migration\VersionManager;
+use IBS\Migration\VersionConfig;
+use IBS\Migration\VersionManager;
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();
@@ -20,7 +20,7 @@ if ($existsEvents && check_bitrix_sessid('send_sessid')) {
     $status = !empty($_POST['status']) ? $_POST['status'] : '';
 
     $markresult = $versionManager->markMigration($version, $status);
-    Sprint\Migration\Out::outMessages($markresult);
+    IBS\Migration\Out::outMessages($markresult);
 
     ?>
     <script>

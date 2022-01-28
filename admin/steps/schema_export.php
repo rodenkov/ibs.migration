@@ -1,9 +1,9 @@
 <?php
 
-use Sprint\Migration\Exceptions\RestartException;
-use Sprint\Migration\Out;
-use Sprint\Migration\SchemaManager;
-use Sprint\Migration\VersionConfig;
+use IBS\Migration\Exceptions\RestartException;
+use IBS\Migration\Out;
+use IBS\Migration\SchemaManager;
+use IBS\Migration\VersionConfig;
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) {
     die();

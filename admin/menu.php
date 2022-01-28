@@ -2,19 +2,19 @@
 global $APPLICATION;
 
 use Bitrix\Main\Loader;
-use Sprint\Migration\Enum\VersionEnum;
-use Sprint\Migration\Locale;
+use IBS\Migration\Enum\VersionEnum;
+use IBS\Migration\Locale;
 
-if ($APPLICATION->GetGroupRight('sprint.migration') == 'D') {
+if ($APPLICATION->GetGroupRight('ibs.migration') == 'D') {
     return false;
 }
 
-if (!Loader::includeModule('sprint.migration')) {
+if (!Loader::includeModule('ibs.migration')) {
     return false;
 }
 
 try {
-    $versionConfig = new Sprint\Migration\VersionConfig();
+    $versionConfig = new IBS\Migration\VersionConfig();
     $configList = $versionConfig->getList();
 
 
@@ -22,7 +22,7 @@ try {
     foreach ($configList as $item) {
         $schemas[] = [
             'text' => $item['schema_title'],
-            'url' => 'sprint_migrations.php?' . http_build_query([
+            'url' => 'ibs_migrations.php?' . http_build_query([
                     'schema' => $item['name'],
                     'lang' => LANGUAGE_ID,
                 ]),
@@ -33,7 +33,7 @@ try {
     foreach ($configList as $item) {
         $items[] = [
             'text' => $item['title'],
-            'url' => 'sprint_migrations.php?' . http_build_query([
+            'url' => 'ibs_migrations.php?' . http_build_query([
                     'config' => $item['name'],
                     'lang' => LANGUAGE_ID,
                 ]),
@@ -48,12 +48,12 @@ try {
 
     $aMenu = [
         'parent_menu' => 'global_menu_settings',
-        'section' => 'Sprint',
+        'section' => 'IBS',
         'sort' => 50,
-        'text' => Locale::getMessage('MENU_SPRINT'),
+        'text' => Locale::getMessage('MENU_IBS'),
         'icon' => 'sys_menu_icon',
         'page_icon' => 'sys_page_icon',
-        'items_id' => 'sprint_migrations',
+        'items_id' => 'ibs_migrations',
         'items' => $items,
     ];
 
@@ -62,13 +62,13 @@ try {
 } catch (Exception $e) {
     $aMenu = [
         'parent_menu' => 'global_menu_settings',
-        'section' => 'Sprint',
+        'section' => 'IBS',
         'sort' => 50,
-        'text' => Locale::getMessage('MENU_SPRINT'),
+        'text' => Locale::getMessage('MENU_IBS'),
         'icon' => 'sys_menu_icon',
         'page_icon' => 'sys_page_icon',
-        'items_id' => 'sprint_migrations',
-        'url' => 'sprint_migrations.php?' . http_build_query([
+        'items_id' => 'ibst_migrations',
+        'url' => 'ibs_migrations.php?' . http_build_query([
                 'config' => VersionEnum::CONFIG_DEFAULT,
                 'lang' => LANGUAGE_ID,
             ]),
@@ -78,13 +78,13 @@ try {
 } catch (Throwable $e) {
     $aMenu = [
         'parent_menu' => 'global_menu_settings',
-        'section' => 'Sprint',
+        'section' => 'IBS',
         'sort' => 50,
-        'text' => Locale::getMessage('MENU_SPRINT'),
+        'text' => Locale::getMessage('MENU_IBS'),
         'icon' => 'sys_menu_icon',
         'page_icon' => 'sys_page_icon',
-        'items_id' => 'sprint_migrations',
-        'url' => 'sprint_migrations.php?' . http_build_query([
+        'items_id' => 'ibs_migrations',
+        'url' => 'ibs_migrations.php?' . http_build_query([
                 'config' => VersionEnum::CONFIG_DEFAULT,
                 'lang' => LANGUAGE_ID,
             ]),

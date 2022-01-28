@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\LoaderException;
@@ -8,7 +8,7 @@ use CDBResult;
 use CMain;
 use ReflectionClass;
 use ReflectionException;
-use Sprint\Migration\Exceptions\HelperException;
+use IBS\Migration\Exceptions\HelperException;
 
 class Helper
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Sprint\Migration\Helpers;
+namespace IBS\Migration\Helpers;
 
-use Sprint\Migration\Exceptions\HelperException;
+use IBS\Migration\Exceptions\HelperException;
 
 /**
  * Class MedialibExchangeHelper
  *
- * @package Sprint\Migration\Helpers
+ * @package IBS\Migration\Helpers
  */
 class MedialibExchangeHelper extends MedialibHelper
 {

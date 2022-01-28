@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
 
 class Version20170213000009 extends Version

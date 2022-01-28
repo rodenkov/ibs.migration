@@ -1,6 +1,6 @@
 <?php
 
-use Sprint\Migration\Locale;
+use IBS\Migration\Locale;
 
 $search = '';
 $listview = '';

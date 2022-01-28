@@ -3,16 +3,16 @@
 global $APPLICATION;
 
 use Bitrix\Main\Loader;
-use Sprint\Migration\Locale;
-use Sprint\Migration\Module;
+use IBS\Migration\Locale;
+use IBS\Migration\Module;
 
 try {
 
-    if (!Loader::includeModule('sprint.migration')) {
-        Throw new Exception('need to install module sprint.migration');
+    if (!Loader::includeModule('ibs.migration')) {
+        Throw new Exception('need to install module ibs.migration');
     }
 
-    if ($APPLICATION->GetGroupRight('sprint.migration') == 'D') {
+    if ($APPLICATION->GetGroupRight('ibs.migration') == 'D') {
         Throw new Exception(Locale::getMessage("ACCESS_DENIED"));
     }
 

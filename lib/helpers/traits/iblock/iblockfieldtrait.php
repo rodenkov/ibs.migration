@@ -1,9 +1,9 @@
 <?php
 
-namespace Sprint\Migration\Helpers\Traits\Iblock;
+namespace IBS\Migration\Helpers\Traits\Iblock;
 
 use CIBlock;
-use Sprint\Migration\Locale;
+use IBS\Migration\Locale;
 
 trait IblockFieldTrait
 {

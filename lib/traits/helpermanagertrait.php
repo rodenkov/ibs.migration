@@ -1,8 +1,8 @@
 <?php
 
-namespace Sprint\Migration\Traits;
+namespace IBS\Migration\Traits;
 
-use Sprint\Migration\HelperManager;
+use IBS\Migration\HelperManager;
 
 trait HelperManagerTrait
 {

@@ -1,10 +1,10 @@
 <?php
 
-use Sprint\Migration\Locale;
+use IBS\Migration\Locale;
 
-class sprint_migration extends CModule
+class ibs_migration extends CModule
 {
-    var $MODULE_ID = "sprint.migration";
+    var $MODULE_ID = "ibs.migration";
     var $MODULE_NAME;
     var $MODULE_VERSION;
     var $MODULE_VERSION_DATE;
@@ -13,7 +13,7 @@ class sprint_migration extends CModule
     var $PARTNER_URI;
     var $MODULE_GROUP_RIGHTS = "Y";
 
-    function sprint_migration()
+    function ibs_migration()
     {
         $arModuleVersion = [];
 
@@ -25,10 +25,10 @@ class sprint_migration extends CModule
         include(__DIR__ . '/../locale/ru.php');
         include(__DIR__ . '/../locale/en.php');
 
-        $this->MODULE_NAME = GetMessage("SPRINT_MIGRATION_RU_MODULE_NAME");
-        $this->MODULE_DESCRIPTION = GetMessage("SPRINT_MIGRATION_RU_MODULE_DESCRIPTION");
-        $this->PARTNER_NAME = GetMessage("SPRINT_MIGRATION_RU_PARTNER_NAME");
-        $this->PARTNER_URI = GetMessage("SPRINT_MIGRATION_RU_PARTNER_URI");
+        $this->MODULE_NAME = GetMessage("IBS_MIGRATION_RU_MODULE_NAME");
+        $this->MODULE_DESCRIPTION = GetMessage("IBS_MIGRATION_RU_MODULE_DESCRIPTION");
+        $this->PARTNER_NAME = GetMessage("IBS_MIGRATION_RU_PARTNER_NAME");
+        $this->PARTNER_URI = GetMessage("IBS_MIGRATION_RU_PARTNER_URI");
     }
 
     function DoInstall()
@@ -37,6 +37,7 @@ class sprint_migration extends CModule
 
         CopyDirFiles(__DIR__ . "/admin", $_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin");
         $this->installGadgets();
+        $this->updateMigrationTables();
     }
 
     function DoUninstall()
@@ -67,5 +68,15 @@ class sprint_migration extends CModule
             ],
         ];
         return $arr;
+    }
+
+    function updateMigrationTables()
+    {
+        global $DB;
+        $sql = "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'sprint_migration%' AND TABLE_SCHEMA=DATABASE();";
+        $result = $DB->Query($sql);
+        while ($row = $result->Fetch()) {
+            $DB->Query("RENAME TABLE ".$row['TABLE_NAME']." TO ".str_replace('sprint_migration','ibs_migration', $row['TABLE_NAME']).";");
+        }
     }
 }

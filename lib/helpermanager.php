@@ -1,26 +1,26 @@
 <?php
 
-namespace Sprint\Migration;
+namespace IBS\Migration;
 
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Helpers\AdminIblockHelper;
-use Sprint\Migration\Helpers\AgentHelper;
-use Sprint\Migration\helpers\DeliveryServiceHelper;
-use Sprint\Migration\Helpers\EventHelper;
-use Sprint\Migration\Helpers\FormHelper;
-use Sprint\Migration\Helpers\HlblockExchangeHelper;
-use Sprint\Migration\Helpers\HlblockHelper;
-use Sprint\Migration\Helpers\IblockExchangeHelper;
-use Sprint\Migration\Helpers\IblockHelper;
-use Sprint\Migration\Helpers\LangHelper;
-use Sprint\Migration\Helpers\MedialibExchangeHelper;
-use Sprint\Migration\Helpers\MedialibHelper;
-use Sprint\Migration\Helpers\OptionHelper;
-use Sprint\Migration\Helpers\SiteHelper;
-use Sprint\Migration\Helpers\SqlHelper;
-use Sprint\Migration\Helpers\UserGroupHelper;
-use Sprint\Migration\Helpers\UserOptionsHelper;
-use Sprint\Migration\Helpers\UserTypeEntityHelper;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Helpers\AdminIblockHelper;
+use IBS\Migration\Helpers\AgentHelper;
+use IBS\Migration\helpers\DeliveryServiceHelper;
+use IBS\Migration\Helpers\EventHelper;
+use IBS\Migration\Helpers\FormHelper;
+use IBS\Migration\Helpers\HlblockExchangeHelper;
+use IBS\Migration\Helpers\HlblockHelper;
+use IBS\Migration\Helpers\IblockExchangeHelper;
+use IBS\Migration\Helpers\IblockHelper;
+use IBS\Migration\Helpers\LangHelper;
+use IBS\Migration\Helpers\MedialibExchangeHelper;
+use IBS\Migration\Helpers\MedialibHelper;
+use IBS\Migration\Helpers\OptionHelper;
+use IBS\Migration\Helpers\SiteHelper;
+use IBS\Migration\Helpers\SqlHelper;
+use IBS\Migration\Helpers\UserGroupHelper;
+use IBS\Migration\Helpers\UserOptionsHelper;
+use IBS\Migration\Helpers\UserTypeEntityHelper;
 
 /**
  * @method IblockHelper             Iblock()
@@ -88,7 +88,7 @@ class HelperManager
             return $this->cache[$name];
         }
 
-        $helperClass = '\\Sprint\\Migration\\Helpers\\' . $name . 'Helper';
+        $helperClass = '\\IBS\\Migration\\Helpers\\' . $name . 'Helper';
         if (class_exists($helperClass)) {
             $this->cache[$name] = new $helperClass;
             return $this->cache[$name];

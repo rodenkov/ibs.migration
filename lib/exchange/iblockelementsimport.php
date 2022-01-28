@@ -1,12 +1,12 @@
 <?php
 
-namespace Sprint\Migration\Exchange;
+namespace IBS\Migration\Exchange;
 
-use Sprint\Migration\AbstractExchange;
-use Sprint\Migration\Exceptions\ExchangeException;
-use Sprint\Migration\Exceptions\HelperException;
-use Sprint\Migration\Exceptions\RestartException;
-use Sprint\Migration\Locale;
+use IBS\Migration\AbstractExchange;
+use IBS\Migration\Exceptions\ExchangeException;
+use IBS\Migration\Exceptions\HelperException;
+use IBS\Migration\Exceptions\RestartException;
+use IBS\Migration\Locale;
 use XMLReader;
 
 class IblockElementsImport extends AbstractExchange
